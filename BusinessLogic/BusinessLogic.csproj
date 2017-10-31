@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLogic.cs" />
-    <Compile Include="CompanieBusinessLogic.cs" />
+    <Compile Include="CompanyBusinessLogic.cs" />
     <Compile Include="ContactBusinessLogic.cs" />
     <Compile Include="DocumentBusinessLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

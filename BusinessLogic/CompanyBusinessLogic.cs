@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Models
+namespace BusinessLogic
 {
-    public class CompanieDTO
+    public class CompanyBusinessLogic :BusinessLogic
     {
     }
 }

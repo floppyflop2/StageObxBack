@@ -8,5 +8,7 @@ namespace BusinessLogic
 {
     public class ContactBusinessLogic : BusinessLogic
     {
+        
+
     }
 }

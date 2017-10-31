@@ -40,6 +40,11 @@ namespace Operations
                     return new StudentBusinessLogic();
                 case "Contact":
                     return new ContactBusinessLogic();
+                case "Documents":
+                    return new DocumentBusinessLogic();
+                case "Company":
+                    return new CompanyBusinessLogic();  
+                   
                 default:
                     return null;
             }

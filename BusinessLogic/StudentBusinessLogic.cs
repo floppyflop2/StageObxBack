@@ -19,6 +19,24 @@ namespace BusinessLogic
         {
             Debug.WriteLine(((StudentDTO)obj).Name);
         }
+
+        public override void Remove(object obj)
+        {
+            base.Remove((StudentDTO)obj);
+        }
+
+        public override void Modify(object obj)
+        {
+            base.Modify((StudentDTO)obj);
+        }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+        }
+
+        
+
     }
 }
 
