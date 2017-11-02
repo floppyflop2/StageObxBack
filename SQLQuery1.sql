@@ -1,4 +1,5 @@
-﻿USE master
+﻿if exists (select * from sysdatabases where name='StageObx')
+		drop database StageObx
 
 CREATE TABLE Companies (
 	"CompanyId" "int" IDENTITY (1, 1) NOT NULL ,

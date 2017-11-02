@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01. Services", "01. Services", "{7F7E57F5-033F-4163-8653-803C1A2A3F05}"
 EndProject
@@ -27,7 +27,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "06. Mapper", "06. Mapper", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseMapper", "DatabaseMapper\DatabaseMapper.csproj", "{AA307F8A-E63A-45A5-B132-77737BE558E0}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "StageObsDb", "StageObsDb\StageObsDb.sqlproj", "{54CDEEB2-6543-4C43-8E8F-D01A8FCCF941}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "07. Domain", "07. Domain", "{C4F3A165-491A-4BA8-89CB-978947C21305}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBDomain", "ClassLibrary2\DBDomain.csproj", "{A8665638-20F9-4C13-BA3C-D3A85C0F19F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,12 +61,10 @@ Global
 		{AA307F8A-E63A-45A5-B132-77737BE558E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA307F8A-E63A-45A5-B132-77737BE558E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA307F8A-E63A-45A5-B132-77737BE558E0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{54CDEEB2-6543-4C43-8E8F-D01A8FCCF941}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{54CDEEB2-6543-4C43-8E8F-D01A8FCCF941}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{54CDEEB2-6543-4C43-8E8F-D01A8FCCF941}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{54CDEEB2-6543-4C43-8E8F-D01A8FCCF941}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{54CDEEB2-6543-4C43-8E8F-D01A8FCCF941}.Release|Any CPU.Build.0 = Release|Any CPU
-		{54CDEEB2-6543-4C43-8E8F-D01A8FCCF941}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A8665638-20F9-4C13-BA3C-D3A85C0F19F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8665638-20F9-4C13-BA3C-D3A85C0F19F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8665638-20F9-4C13-BA3C-D3A85C0F19F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8665638-20F9-4C13-BA3C-D3A85C0F19F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,5 +76,6 @@ Global
 		{7FBA2FB0-06C1-4872-B671-D6053B4B2F71} = {7820900E-7168-4345-A8DB-995C697D2315}
 		{ED958976-EDD6-47CB-B00C-B23F6D592A1A} = {7F7E57F5-033F-4163-8653-803C1A2A3F05}
 		{AA307F8A-E63A-45A5-B132-77737BE558E0} = {4A5A37D8-2AB3-4FE8-89F1-C14497557AE7}
+		{A8665638-20F9-4C13-BA3C-D3A85C0F19F7} = {C4F3A165-491A-4BA8-89CB-978947C21305}
 	EndGlobalSection
 EndGlobal

@@ -11,9 +11,9 @@ namespace DispatchService.Models
         public string Name { get; set; }
         public string Type { get; set; }
         public StudentDTO StudentDTO { get; set; }
-        public DocumentDTO DocumentDTO { get; set; }
+        public InternshipDTO DocumentDTO { get; set; }
         public ContactDTO ContactDTO { get; set; }
-        public CompanieDTO CompanieDTO { get; set; }
+        public CompanyDTO CompanieDTO { get; set; }
 
         public object FindCorrectDTO()
         {

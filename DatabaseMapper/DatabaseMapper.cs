@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using ClassLibrary2;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,24 @@ namespace DatabaseMapper
 {
     public static class DatabaseMapper
     {
-        public StudentDTO MapToDTO(Student student)
+        public static StudentDTO MapToStudentDTO(Students student)
         {
             return null;
+        }
+
+        public static ContactDTO MapToContactDTO(Contacts contact)
+        {
+            return new ContactDTO();
+        }
+
+        public static CompanyDTO MapToCompanyDTO(Companies company)
+        {
+            return new CompanyDTO();
+        }
+
+        public static InternshipDTO MapToInternshipDTO(Internship internship)
+        {
+            return new InternshipDTO();
         }
     }
 }
