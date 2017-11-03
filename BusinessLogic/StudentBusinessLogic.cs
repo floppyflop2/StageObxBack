@@ -10,7 +10,7 @@ namespace BusinessLogic
 {
     public class StudentBusinessLogic : BusinessLogic
     {
-        public override object Get()
+        public override object Get(int id )
         {
             return new StudentDTO { Name = "Alex", FirstName = "Le Jacko"};
         }

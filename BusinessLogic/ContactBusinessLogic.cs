@@ -10,7 +10,7 @@ namespace BusinessLogic
 {
     public class ContactBusinessLogic : BusinessLogic
     {
-        public override object Get()
+        public override object Get(int id)
         {
             return new ContactDTO { };
         }

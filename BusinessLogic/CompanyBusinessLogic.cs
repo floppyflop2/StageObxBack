@@ -1,35 +1,46 @@
-﻿using ClassLibrary2;
+﻿using DBDomain;
 using Models;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
+using System.Collections.Generic;
+using System;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    public class CompanyBusinessLogic :BusinessLogic
+    public class CompanyBusinessLogic : BusinessLogic
     {
 
 
-        private StageObxModel db = new StageObxModel() ;
+        private readonly StageObxContext db;
 
-        public override object Get()
+        public CompanyBusinessLogic(StageObxContext db)
         {
-            return new CompanyDTO { };
+            this.db = db;
+        }
+
+        public override List<object> GetAll()
+        {
+            return base.GetAll();
+        }
+
+        public override object Get(int id)
+        {
+            var result = db.Companies.FirstOrDefault(c => c.CompanyId == id);
+            return result;
+
         }
 
         public override void Add(object obj)
         {
-            
+
             Debug.WriteLine("");
         }
 
         public override void Remove(object obj)
         {
             base.Remove((CompanyDTO)obj);
+
+
         }
 
         public override void Modify(object obj)

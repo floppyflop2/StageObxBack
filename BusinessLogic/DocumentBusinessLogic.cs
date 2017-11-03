@@ -11,7 +11,7 @@ namespace BusinessLogic
     public class DocumentBusinessLogic : BusinessLogic
     {
 
-        public override object Get()
+        public override object Get(int id)
         {
             return new InternshipDTO {};
         }

@@ -8,7 +8,13 @@ namespace Models
 {
     public class StudentDTO
     {
+
+        //public StudentDTO(StagObxModel)
+
         public string Name { get; set; }
         public string FirstName { get; set; }
+
+
+
     }
 }

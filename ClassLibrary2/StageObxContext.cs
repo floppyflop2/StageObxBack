@@ -1,13 +1,17 @@
-namespace ClassLibrary2
+namespace DBDomain
 {
     using System;
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
+    using System.Data.Common;
+    using System.Data.Entity.Core.Objects;
+    using DBDomain;
+    using System.Reflection;
 
-    public partial class StageObxModel : DbContext
+    public partial class StageObxContext : DbContext
     {
-        public StageObxModel()
+        public StageObxContext()
             : base("name=StageObxModel")
         {
         }
@@ -24,5 +28,7 @@ namespace ClassLibrary2
                 .WithRequired(e => e.Companies)
                 .WillCascadeOnDelete(false);
         }
+
     }
+
 }

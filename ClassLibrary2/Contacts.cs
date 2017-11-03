@@ -1,4 +1,4 @@
-namespace ClassLibrary2
+namespace DBDomain
 {
     using System;
     using System.Collections.Generic;
