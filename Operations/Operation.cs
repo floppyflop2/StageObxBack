@@ -41,7 +41,7 @@ namespace Operations
                 case "Contact":
                     return new ContactBusinessLogic();
                 case "Documents":
-                    return new DocumentBusinessLogic();
+                    return new InternshipBusinessLogic();
                 case "Company":
                     return new CompanyBusinessLogic();  
                    

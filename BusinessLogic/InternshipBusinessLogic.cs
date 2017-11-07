@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    public class ContactBusinessLogic : BusinessLogic
+    public class InternshipBusinessLogic : BusinessLogic
     {
+
         private readonly StageObxContext db;
 
-        public ContactBusinessLogic(StageObxContext db)
+        public InternshipBusinessLogic(StageObxContext db)
         {
             this.db = db;
         }
@@ -25,7 +26,7 @@ namespace BusinessLogic
             {
                 using (var db = new StageObxContext())
                 {
-                    compList = db.Contacts.ToList();
+                    compList = db.Internship.ToList();
                 }
             }
             catch
@@ -37,12 +38,12 @@ namespace BusinessLogic
 
         public override object Get(int id)
         {
-            Contacts comp = new Contacts();
+            Internship comp = new Internship();
             try
             {
                 using (var db = new StageObxContext())
                 {
-                    var result = db.Contacts.FirstOrDefault(c => c.CompanyId == id);
+                    var result = db.Internship.FirstOrDefault(c => c.InternshipId == id);
                     comp = result;
                 }
             }
@@ -59,8 +60,9 @@ namespace BusinessLogic
                 using (var db = new StageObxContext())
                 {
                     //TODO effectuer verif pour les doublons 
-                    var result = db.Contacts.FirstOrDefault(c => c.contactName == obj.Name);
-                    if (!obj.Equals((Contacts)result)) db.Contacts.Add((Contacts)obj);
+                    // var result = db.Internship.FirstOrDefault(c => c.S == obj.Name);
+                    // if (!obj.Equals((Internship)result)) db.Internship.Add((Document)obj);
+                    db.Internship.Add(obj);
                     db.SaveChanges();
                 }
             }
@@ -76,26 +78,29 @@ namespace BusinessLogic
                 using (var db = new StageObxContext())
                 {
                     //TODO il faut typer pour le remove 
-                    var result = db.Contacts.FirstOrDefault(c => c.ContactId == obj.id);
-                    if (result != null) db.Contacts.Remove(obj);
+                    var result = db.Internship.FirstOrDefault(c => c.InternshipId == obj.id);
+                    if (result != null) db.Internship.Remove(obj);
                     db.SaveChanges();
                 }
             }
             catch
             { }
+
+
         }
 
         public override void Modify(object obj)
         {
+
             try
             {
                 using (var db = new StageObxContext())
                 {
-                    var result = db.Contacts.FirstOrDefault(c => c.ContactId == obj.id);
+                    var result = db.Internship.FirstOrDefault(c => c.InternshipId == obj.id);
                     if (result != null)
                     {
-                        db.Contacts.Remove(result);
-                        db.Contacts.Add((Contacts)obj);
+                        db.Internship.Remove(result);
+                        db.Internship.Add((Internship)obj);
                         db.SaveChanges();
                     }
                 }
@@ -109,5 +114,4 @@ namespace BusinessLogic
             base.Dispose();
         }
     }
-}
 }

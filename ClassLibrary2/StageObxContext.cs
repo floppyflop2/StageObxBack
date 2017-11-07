@@ -11,15 +11,20 @@ namespace DBDomain
 
     public partial class StageObxContext : DbContext
     {
-        public StageObxContext()
-            : base("name=StageObxModel")
-        {
-        }
 
         public virtual DbSet<Companies> Companies { get; set; }
         public virtual DbSet<Contacts> Contacts { get; set; }
         public virtual DbSet<Students> Students { get; set; }
         public virtual DbSet<Internship> Internship { get; set; }
+
+        public StageObxContext() : base("name=StageObxModel")
+        {
+        }
+
+        public StageObxContext(string connectionstring) : base(connectionstring)
+        {
+        }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

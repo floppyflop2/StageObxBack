@@ -20,32 +20,91 @@ namespace BusinessLogic
 
         public override List<object> GetAll()
         {
-            return base.GetAll();
+            List<object> compList = new List<object>();
+            try
+            {
+                using (var db = new StageObxContext())
+                {
+                    compList = db.Companies.ToList();
+                }
+            }
+            catch
+            {
+
+            }
+            return compList;
         }
 
         public override object Get(int id)
         {
-            var result = db.Companies.FirstOrDefault(c => c.CompanyId == id);
-            return result;
+            Companies comp = new Companies();
+            try
+            {
+                using (var db = new StageObxContext())
+                {
+                    var result = db.Companies.FirstOrDefault(c => c.CompanyId == id);
+                    comp = result;
+                }
+            }
+            catch
+            {            }
+            return comp;
 
         }
 
         public override void Add(object obj)
         {
-
-            Debug.WriteLine("");
+            try
+            {
+                using (var db = new StageObxContext())
+                {
+                    //TODO effectuer verif pour les doublons 
+                    var result = db.Companies.FirstOrDefault(c => c.companyName == obj.Name);
+                    if (!obj.Equals((Companies)result)) db.Companies.Add((Companies)obj);
+                    db.SaveChanges();
+                }
+            }
+            catch
+            { }
         }
 
         public override void Remove(object obj)
         {
-            base.Remove((CompanyDTO)obj);
+
+            try
+            {
+                using (var db = new StageObxContext())
+                {
+                 //TODO il faut typer pour le remove 
+                    var result = db.Companies.FirstOrDefault(c => c.CompanyId ==  obj.id);
+                    if (result != null) db.Companies.Remove(obj);
+                    db.SaveChanges();
+                }
+            }
+            catch
+            { }
 
 
         }
 
         public override void Modify(object obj)
         {
-            base.Modify((CompanyDTO)obj);
+            
+            try
+            {
+                using (var db = new StageObxContext())
+                {
+                    var result = db.Companies.FirstOrDefault(c => c.CompanyId == obj.id);
+                    if (result != null)
+                    {
+                        db.Companies.Remove(result);
+                        db.Companies.Add((Companies)obj);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch
+            { }
         }
 
         public override void Dispose()

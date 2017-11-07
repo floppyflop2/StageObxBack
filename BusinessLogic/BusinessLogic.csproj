@@ -56,7 +56,7 @@
     <Compile Include="BusinessLogic.cs" />
     <Compile Include="CompanyBusinessLogic.cs" />
     <Compile Include="ContactBusinessLogic.cs" />
-    <Compile Include="DocumentBusinessLogic.cs" />
+    <Compile Include="InternshipBusinessLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StudentBusinessLogic.cs" />
   </ItemGroup>
