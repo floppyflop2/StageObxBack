@@ -99,6 +99,13 @@ namespace BusinessLogic
                     var result = db.Internship.FirstOrDefault(c => c.InternshipId == obj.id);
                     if (result != null) db.Internship.Remove(obj);
                     db.SaveChanges();
+
+                    /*
+                     * var result = db.Internship.Where(i => i.InternshipId == obj.InternshipId);
+                     * db.Internship.Remove(result);
+                     * db.SaveChanges();
+                     * 
+                     * */
                 }
             }
             catch
@@ -121,6 +128,14 @@ namespace BusinessLogic
                         db.Internship.Add((Internship)obj);
                         db.SaveChanges();
                     }
+
+                    /*
+                     * var result = db.Internship.Where(i => i.InternshipId == obj.InternshipId);
+                     * db.Companies.Remove(result);
+                     * db.Companies.Add((Internship)obj);
+                     * db.SaveChanges();
+                     * 
+                     * */
                 }
             }
             catch

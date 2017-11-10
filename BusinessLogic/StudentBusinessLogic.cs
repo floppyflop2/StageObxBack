@@ -52,6 +52,16 @@ namespace BusinessLogic
 
         }
 
+        public int StudentCheck(object obj){
+            var result = db.Students.Where(s => s.Studentemail == obj.Studentemail);
+            if (result == null){
+                return -1;
+            }
+            else{
+                return result.StudentId;
+            }
+        }
+
         public override void Add(object obj)
         {
             try
@@ -62,6 +72,14 @@ namespace BusinessLogic
                     var result = db.Students.FirstOrDefault(c => c.StudentName == obj.Name);
                     if (!obj.Equals((Students)result)) db.Students.Add((Students)obj);
                     db.SaveChanges();
+
+                    /*
+                     * int studentMax = db.Students.Max(s => s.StudentId);
+                     * Students student = new Students(){StudentId = studentMax+1, StudentName = obj.Name, Studentsurname = obj.Surname, departement = obj.Department, Studenttelephone = obj.Telephone, Studentemail = obj = Email};
+                     * db.Students.Add(student);
+                     * db.SaveChanges();
+                     * 
+                     * */
                 }
             }
             catch
@@ -79,6 +97,13 @@ namespace BusinessLogic
                     var result = db.Students.FirstOrDefault(c => c.StudentId == obj.id);
                     if (result != null) db.Students.Remove(obj);
                     db.SaveChanges();
+
+                    /*
+                     * var result = db.Students.Where(s => s.StudentId == obj.StudentId);
+                     * db.Students.Remove(result);
+                     * db.SaveChanges();
+                     * 
+                     * */
                 }
             }
             catch
@@ -101,6 +126,14 @@ namespace BusinessLogic
                         db.Students.Add((Students)obj);
                         db.SaveChanges();
                     }
+
+                    /*
+                     * var result = db.Students.Where(s => s.StudentId == obj.StudentId);
+                     * db.Companies.Remove(result);
+                     * db.Companies.Add((Students)obj);
+                     * db.SaveChanges();
+                     * 
+                     * */
                 }
             }
             catch
@@ -113,5 +146,5 @@ namespace BusinessLogic
         }
     }
 }
-}
+
 
