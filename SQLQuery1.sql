@@ -53,9 +53,9 @@ CREATE TABLE Internship
 
 	CONSTRAINT "FK_Company" FOREIGN KEY 
 	(
-		"CompanyID"
+		"CompanyId"
 	) REFERENCES "dbo"."Companies" (
-		"CompanyID"
+		"CompanyId"
 	),
 
 	CONSTRAINT "FK_Student" FOREIGN KEY 
