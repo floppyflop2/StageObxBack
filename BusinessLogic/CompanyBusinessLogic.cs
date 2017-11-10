@@ -52,6 +52,17 @@ namespace BusinessLogic
 
         }
 
+        public int CompanyCheck(object obj)
+        {
+            var result = db.Companies.Where(c => c.companyName == obj.Name);
+            if (result == null){
+                return -1;
+            }
+            else{
+                return result.CompanyId;
+            }
+        }
+
         public override void Add(object obj)
         {
             try
@@ -62,6 +73,14 @@ namespace BusinessLogic
                     var result = db.Companies.FirstOrDefault(c => c.companyName == obj.Name);
                     if (!obj.Equals((Companies)result)) db.Companies.Add((Companies)obj);
                     db.SaveChanges();
+
+                    /*
+                     * int companyMax = db.Companies.Max(c => c.CompanyId);
+                     * Companies company = new Companies(){CompanyId = companyMax+1, companyName = obj.Name, city = obj.City, streetname = obj.Streetname, postalCode = obj.PostalCode, companyTelephone = obj.CompanyTelephone};
+                     * db.Companies.Add(company);
+                     * db.SaveChanges();
+                     * 
+                     * */
                 }
             }
             catch
@@ -79,6 +98,13 @@ namespace BusinessLogic
                     var result = db.Companies.FirstOrDefault(c => c.CompanyId ==  obj.id);
                     if (result != null) db.Companies.Remove(obj);
                     db.SaveChanges();
+
+                    /*
+                     * var result = db.Companies.Where(c => c.companyName == obj.Name).FirstOrDefault();
+                     * db.Companies.Remove(result);
+                     * db.SaveChanges();
+                     * 
+                     * */
                 }
             }
             catch
@@ -101,6 +127,14 @@ namespace BusinessLogic
                         db.Companies.Add((Companies)obj);
                         db.SaveChanges();
                     }
+
+                    /*
+                     * var result = db.Companies.Where(c => c.CompanyId == obj.id);
+                     * db.Companies.Remove(result);
+                     * db.Companies.Add((Companies)obj);
+                     * db.SaveChanges();
+                     * 
+                     * */
                 }
             }
             catch

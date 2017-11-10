@@ -53,6 +53,16 @@ namespace BusinessLogic
 
         }
 
+        public int InternshipCheck(object obj){
+            var result = db.Internship.Where(i => i.CompanyId  == obj.CompanyId && i.StudentId == obj.StudentId);
+            if (result == null){
+                return -1;
+            }
+            else{
+                return result.InternshipId;
+            }
+        }
+
         public override void Add(object obj)
         {
             try
@@ -64,6 +74,14 @@ namespace BusinessLogic
                     // if (!obj.Equals((Internship)result)) db.Internship.Add((Document)obj);
                     db.Internship.Add(obj);
                     db.SaveChanges();
+
+                    /*
+                     * int internshipMax = db.Internship.Max(c => c.InternshipId);
+                     * Internship internship = new Internship(){InternshipId = internshipMax+1, CompanyId = obj.CompanyId, StudentId = obj.StudentId, year = obj.year};
+                     * db.Internship.Add(internship);
+                     * db.SaveChanges();
+                     * 
+                     * */
                 }
             }
             catch
