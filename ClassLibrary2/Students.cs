@@ -25,21 +25,21 @@ namespace DBDomain
 
         [Required]
         [StringLength(40)]
-        public string Studentsurname { get; set; }
+        public string StudentFirstName { get; set; }
 
         [Required]
         [StringLength(5)]
-        public string departement { get; set; }
+        public string StudentDepartement { get; set; }
 
         [Required]
         [StringLength(20)]
-        public string Studenttelephone { get; set; }
+        public string StudentTelephone { get; set; }
 
         [Required]
         [StringLength(30)]
-        public string Studentemail { get; set; }
+        public string StudentEmail { get; set; }
 
-        public byte[] document { get; set; }
+        public byte[] StudentDocument { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Internship> Internship { get; set; }

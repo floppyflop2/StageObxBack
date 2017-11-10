@@ -13,19 +13,19 @@ namespace DBDomain
 
         [Required]
         [StringLength(40)]
-        public string contactName { get; set; }
+        public string ContactName { get; set; }
 
         [Required]
         [StringLength(40)]
-        public string contactSurname { get; set; }
+        public string ContactFirstName { get; set; }
 
         [Required]
         [StringLength(20)]
-        public string contactTelephone { get; set; }
+        public string ContactTelephone { get; set; }
 
         [Required]
         [StringLength(30)]
-        public string contactEmail { get; set; }
+        public string ContactEmail { get; set; }
 
         public int CompanyId { get; set; }
 

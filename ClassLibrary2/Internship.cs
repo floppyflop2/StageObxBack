@@ -15,7 +15,7 @@ namespace DBDomain
 
         public int? StudentId { get; set; }
 
-        public DateTime? year { get; set; }
+        public DateTime? InternshipYear { get; set; }
 
         public virtual Companies Companies { get; set; }
 

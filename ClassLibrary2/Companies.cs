@@ -20,21 +20,21 @@ namespace DBDomain
 
         [Required]
         [StringLength(255)]
-        public string companyName { get; set; }
+        public string CompanyName { get; set; }
 
         [Required]
         [StringLength(30)]
-        public string city { get; set; }
+        public string CompanyCity { get; set; }
 
         [Required]
         [StringLength(30)]
-        public string streetname { get; set; }
+        public string CompanyStreetName { get; set; }
 
-        public int postalCode { get; set; }
+        public int CompanyPostalCode { get; set; }
 
         [Required]
         [StringLength(20)]
-        public string companyTelephone { get; set; }
+        public string CompanyTelephone { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contacts> Contacts { get; set; }
