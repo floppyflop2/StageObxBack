@@ -15,10 +15,10 @@ namespace ClassLibrary1
     public partial class Contacts
     {
         public int ContactId { get; set; }
-        public string contactName { get; set; }
-        public string contactSurname { get; set; }
-        public string contactTelephone { get; set; }
-        public string contactEmail { get; set; }
+        public string ContactName { get; set; }
+        public string ContactFirstname { get; set; }
+        public string ContactTelephone { get; set; }
+        public string ContactEmail { get; set; }
         public int CompanyId { get; set; }
     
         public virtual Companies Companies { get; set; }

@@ -22,11 +22,11 @@ namespace ClassLibrary1
     
         public int StudentId { get; set; }
         public string StudentName { get; set; }
-        public string Studentsurname { get; set; }
-        public string departement { get; set; }
-        public string Studenttelephone { get; set; }
-        public string Studentemail { get; set; }
-        public byte[] document { get; set; }
+        public string StudentFirstName { get; set; }
+        public string StudentDepartement { get; set; }
+        public string StudentTelephone { get; set; }
+        public string StudentEmail { get; set; }
+        public byte[] StudentDocument { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Internship> Internship { get; set; }

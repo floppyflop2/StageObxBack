@@ -3,11 +3,11 @@
 
 CREATE TABLE Companies (
 	"CompanyId" "int" IDENTITY (1, 1) NOT NULL ,
-	"companyName" nvarchar (255) NOT NULL ,
-	"city" nvarchar(30) NOT NULL ,
-	"streetname" nvarchar(30) NOT NULL ,
-	"postal_code" int NOT NULL ,
-	"companyTelephone" nvarchar (20) NOT NULL ,
+	"CompanyName" nvarchar (255) NOT NULL ,
+	"CompanyCity" nvarchar(30) NOT NULL ,
+	"CompanyStreetName" nvarchar(30) NOT NULL ,
+	"CompanyPostalCode" int NOT NULL ,
+	"CompanyTelephone" nvarchar (20) NOT NULL ,
 
 	CONSTRAINT "PK_Company" PRIMARY KEY  CLUSTERED 
 	(
@@ -16,20 +16,20 @@ CREATE TABLE Companies (
 
 ) 
 
- CREATE  INDEX "City" ON "dbo"."Companies"("city")
+ CREATE  INDEX "CompanyCity" ON "dbo"."Companies"("city")
 
  CREATE  INDEX "CompanyName" ON "dbo"."Companies"("companyName")
 
- CREATE  INDEX "PostalCode" ON "dbo"."Companies"("postalCode")
+ CREATE  INDEX "CompanyPostalCode" ON "dbo"."Companies"("postalCode")
 
  
 
 CREATE TABLE Contacts (
 	"ContactId" "int" IDENTITY (1, 1) NOT NULL ,
-	"contactName" nvarchar (40) NOT NULL ,
-	"contactSurname" nvarchar (40) NOT NULL ,
-	"contactTelephone" nvarchar (20) NOT NULL ,
-	"contactEmail" nvarchar (30) NOT NULL ,
+	"ContactName" nvarchar (40) NOT NULL ,
+	"ContactFirstname" nvarchar (40) NOT NULL ,
+	"ContactTelephone" nvarchar (20) NOT NULL ,
+	"ContactEmail" nvarchar (30) NOT NULL ,
 	"CompanyId" int NOT NULL,
 	
 	CONSTRAINT "PK_Contacts" PRIMARY KEY  CLUSTERED 
@@ -38,9 +38,9 @@ CREATE TABLE Contacts (
 	),
 	CONSTRAINT "FK_Company" FOREIGN KEY 
 	(
-		"CompanyID"
+		"CompanyId"
 	) REFERENCES "dbo"."Companies" (
-		"CompanyID"
+		"CompanyId"
 	),
 ) 
 
@@ -49,7 +49,7 @@ CREATE TABLE Internship
 	"InternshipId" "int" IDENTITY (1, 1) NOT NULL ,
 	"CompanyId" int,
 	"StudentId" int,
-	"year" datetime,
+	"InternshipYear" datetime,
 
 	CONSTRAINT "FK_Company" FOREIGN KEY 
 	(
@@ -60,9 +60,9 @@ CREATE TABLE Internship
 
 	CONSTRAINT "FK_Student" FOREIGN KEY 
 	(
-		"StudentID"
+		"StudentId"
 	) REFERENCES "dbo"."Students" (
-		"StudentID"
+		"StudentId"
 	),
 
 ) 
@@ -70,11 +70,11 @@ CREATE TABLE Internship
 CREATE TABLE Students (
 	"StudentId" "int" IDENTITY (1, 1) NOT NULL ,
 	"StudentName" nvarchar (40) NOT NULL ,
-	"Studentsurname" nvarchar (40) NOT NULL ,
-	"departement" nvarchar(5) NOT NULL ,
-	"Studenttelephone" nvarchar (20) NOT NULL ,
-	"Studentemail" nvarchar (30) NOT NULL ,
-	"document" varbinary(MAX),
+	"StudentFirstName" nvarchar (40) NOT NULL ,
+	"StudentDepartement" nvarchar(5) NOT NULL ,
+	"StudentTelephone" nvarchar (20) NOT NULL ,
+	"StudentEmail" nvarchar (30) NOT NULL ,
+	"StudentDocument" varbinary(MAX),
 
 	CONSTRAINT "PK_Students" PRIMARY KEY  CLUSTERED 
 	(

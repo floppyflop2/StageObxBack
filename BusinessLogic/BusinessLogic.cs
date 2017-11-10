@@ -24,7 +24,7 @@ namespace BusinessLogic
             throw new Exception("Not implemented for this object");
         }
 
-        public virtual void Remove(object obj)
+        public virtual void Remove(int id)
         {
             throw new Exception("Not implemented for this object");
         }

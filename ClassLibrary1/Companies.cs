@@ -22,11 +22,11 @@ namespace ClassLibrary1
         }
     
         public int CompanyId { get; set; }
-        public string companyName { get; set; }
-        public string city { get; set; }
-        public string streetname { get; set; }
-        public int postalCode { get; set; }
-        public string companyTelephone { get; set; }
+        public string CompanyName { get; set; }
+        public string CompanyCity { get; set; }
+        public string CompanyStreetName { get; set; }
+        public int CompanyPostalCode { get; set; }
+        public string CompanyTelephone { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contacts> Contacts { get; set; }

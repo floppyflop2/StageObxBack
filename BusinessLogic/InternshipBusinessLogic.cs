@@ -43,7 +43,7 @@ namespace BusinessLogic
             {
                 using (var db = new StageObxContext())
                 {
-                    var result = db.Internship.FirstOrDefault(c => c.InternshipId == id);
+                    var result = db.Internship.Where(c => c.InternshipId == id).FirstOrDefault();
                     comp = result;
                 }
             }
@@ -77,7 +77,7 @@ namespace BusinessLogic
 
                     /*
                      * int internshipMax = db.Internship.Max(c => c.InternshipId);
-                     * Internship internship = new Internship(){InternshipId = internshipMax+1, CompanyId = obj.CompanyId, StudentId = obj.StudentId, year = obj.year};
+                     * Internship internship = new Internship(){InternshipId = internshipMax+1, CompanyId = obj.CompanyId, StudentId = obj.StudentId, InternshipYear = obj.InternshipYear};
                      * db.Internship.Add(internship);
                      * db.SaveChanges();
                      * 
@@ -88,7 +88,7 @@ namespace BusinessLogic
             { }
         }
 
-        public override void Remove(object obj)
+        public override void Remove(int id)
         {
 
             try
@@ -96,12 +96,12 @@ namespace BusinessLogic
                 using (var db = new StageObxContext())
                 {
                     //TODO il faut typer pour le remove 
-                    var result = db.Internship.FirstOrDefault(c => c.InternshipId == obj.id);
+                    var result = db.Internship.FirstOrDefault(c => c.InternshipId == id);
                     if (result != null) db.Internship.Remove(obj);
                     db.SaveChanges();
 
                     /*
-                     * var result = db.Internship.Where(i => i.InternshipId == obj.InternshipId);
+                     * var result = db.Internship.Where(i => i.InternshipId == id);
                      * db.Internship.Remove(result);
                      * db.SaveChanges();
                      * 

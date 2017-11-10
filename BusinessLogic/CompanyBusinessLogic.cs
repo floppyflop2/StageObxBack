@@ -42,7 +42,7 @@ namespace BusinessLogic
             {
                 using (var db = new StageObxContext())
                 {
-                    var result = db.Companies.FirstOrDefault(c => c.CompanyId == id);
+                    var result = db.Companies.Where(c => c.CompanyId == id).FirstOrDefault();
                     comp = result;
                 }
             }
@@ -54,7 +54,7 @@ namespace BusinessLogic
 
         public int CompanyCheck(object obj)
         {
-            var result = db.Companies.Where(c => c.companyName == obj.Name);
+            var result = db.Companies.Where(c => c.CompanyName == obj.CompanyName);
             if (result == null){
                 return -1;
             }
@@ -76,7 +76,7 @@ namespace BusinessLogic
 
                     /*
                      * int companyMax = db.Companies.Max(c => c.CompanyId);
-                     * Companies company = new Companies(){CompanyId = companyMax+1, companyName = obj.Name, city = obj.City, streetname = obj.Streetname, postalCode = obj.PostalCode, companyTelephone = obj.CompanyTelephone};
+                     * Companies company = new Companies(){CompanyId = companyMax+1, CompanyName = obj.CompanyName , CompanyCity = obj.CompanyCity, CompanyStreetName = obj.CompanyStreetName, CompanyPostalCode = obj.CompanyPostalCode, CompanyTelephone = obj.CompanyTelephone};
                      * db.Companies.Add(company);
                      * db.SaveChanges();
                      * 
@@ -87,7 +87,7 @@ namespace BusinessLogic
             { }
         }
 
-        public override void Remove(object obj)
+        public override void Remove(int id)
         {
 
             try
@@ -95,12 +95,12 @@ namespace BusinessLogic
                 using (var db = new StageObxContext())
                 {
                  //TODO il faut typer pour le remove 
-                    var result = db.Companies.FirstOrDefault(c => c.CompanyId ==  obj.id);
+                    var result = db.Companies.FirstOrDefault(c => c.CompanyId ==  id);
                     if (result != null) db.Companies.Remove(obj);
                     db.SaveChanges();
 
                     /*
-                     * var result = db.Companies.Where(c => c.companyName == obj.Name).FirstOrDefault();
+                     * var result = db.Companies.Where(c => c.CompanyId == id);
                      * db.Companies.Remove(result);
                      * db.SaveChanges();
                      * 
@@ -129,7 +129,7 @@ namespace BusinessLogic
                     }
 
                     /*
-                     * var result = db.Companies.Where(c => c.CompanyId == obj.id);
+                     * var result = db.Companies.Where(c => c.CompanyId == obj.CompanyId);
                      * db.Companies.Remove(result);
                      * db.Companies.Add((Companies)obj);
                      * db.SaveChanges();

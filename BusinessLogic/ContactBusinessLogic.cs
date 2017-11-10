@@ -42,7 +42,7 @@ namespace BusinessLogic
             {
                 using (var db = new StageObxContext())
                 {
-                    var result = db.Contacts.FirstOrDefault(c => c.CompanyId == id);
+                    var result = db.Contacts.Where(c => c.CompanyId == id).FirstOrDefault();
                     comp = result;
                 }
             }
@@ -54,7 +54,7 @@ namespace BusinessLogic
 
         public int ContactCheck(object obj)
         {
-            var result = db.Contacts.Where(c => c.contactEmail == obj.Email);
+            var result = db.Contacts.Where(c => c.ContactEmail == obj.ContactEmail);
             if (result == null){
                 return -1;
             }
@@ -76,7 +76,7 @@ namespace BusinessLogic
 
                     /*
                      * int contactMax = db.Contacts.Max(c => c.ContactId);
-                     * Contacts contact = new Contacts(){ContactId = contactMax+1, contactName = obj.Name, contactSurname = obj.Surname, contactTelephone = obj.Telephone, postalCode = obj.PostalCode, contactEmail = obj.Email, CompanyId = obj.CompanyId};
+                     * Contacts contact = new Contacts(){ContactId = contactMax+1, ContactName = obj.ContactName, ContactFirstName = obj.ContactFirstName, ContactTelephone = obj.ContactTelephone, ContactPostalCode = obj.ContactPostalCode, ContactEmail = obj.ContactEmail, CompanyId = obj.CompanyId};
                      * db.Contacts.Add(contact);
                      * db.SaveChanges();
                      * 
@@ -87,7 +87,7 @@ namespace BusinessLogic
             { }
         }
 
-        public override void Remove(object obj)
+        public override void Remove(int id)
         {
 
             try
@@ -95,14 +95,14 @@ namespace BusinessLogic
                 using (var db = new StageObxContext())
                 {
                     //TODO il faut typer pour le remove 
-                    var result = db.Contacts.FirstOrDefault(c => c.ContactId == obj.id);
+                    var result = db.Contacts.FirstOrDefault(c => c.ContactId == id);
                     if (result != null) db.Contacts.Remove(obj);
                     db.SaveChanges();
 
                     /*
-                     * var result = db.Contacts.Where(c => c.contactEmail == obj.Email);
-                     * db.Companies.Remove(result);
-                     * db.SaveChanges();
+                     * var result = db.contacts.Where(c => c.ContactId == id);
+                     * db.companies.remove(result);
+                     * db.savechanges();
                      * 
                      * */
                 }
@@ -126,7 +126,7 @@ namespace BusinessLogic
                     }
 
                     /*
-                     * var result = db.Contacts.Where(c => c.contactEmail == obj.Email);
+                     * var result = db.Contacts.Where(c => c.ContactId == obj.ContactId);
                      * db.Companies.Remove(result);
                      * db.Companies.Add((Contacts)obj);
                      * db.SaveChanges();
@@ -144,4 +144,4 @@ namespace BusinessLogic
         }
     }
 }
-}
+

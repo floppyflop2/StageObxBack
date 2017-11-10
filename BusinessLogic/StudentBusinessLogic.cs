@@ -42,7 +42,7 @@ namespace BusinessLogic
             {
                 using (var db = new StageObxContext())
                 {
-                    var result = db.Students.FirstOrDefault(c => c.StudentId == id);
+                    var result = db.Students.Where(c => c.StudentId == id).FirstOrDefault();
                     comp = result;
                 }
             }
@@ -53,7 +53,7 @@ namespace BusinessLogic
         }
 
         public int StudentCheck(object obj){
-            var result = db.Students.Where(s => s.Studentemail == obj.Studentemail);
+            var result = db.Students.Where(s => s.StudentEmail == obj.Email);
             if (result == null){
                 return -1;
             }
@@ -75,7 +75,7 @@ namespace BusinessLogic
 
                     /*
                      * int studentMax = db.Students.Max(s => s.StudentId);
-                     * Students student = new Students(){StudentId = studentMax+1, StudentName = obj.Name, Studentsurname = obj.Surname, departement = obj.Department, Studenttelephone = obj.Telephone, Studentemail = obj = Email};
+                     * Students student = new Students(){StudentId = studentMax+1, StudentName = obj.StudentName, StudentFirstName = obj.StudentFirstName, StudentDepartement = obj.StudentDepartement, StudentTelephone = obj.StudentTelephone, StudentEmail = obj.StudentEmail};
                      * db.Students.Add(student);
                      * db.SaveChanges();
                      * 
@@ -86,7 +86,7 @@ namespace BusinessLogic
             { }
         }
 
-        public override void Remove(object obj)
+        public override void Remove(int id)
         {
 
             try
@@ -94,7 +94,7 @@ namespace BusinessLogic
                 using (var db = new StageObxContext())
                 {
                     //TODO il faut typer pour le remove 
-                    var result = db.Students.FirstOrDefault(c => c.StudentId == obj.id);
+                    var result = db.Students.FirstOrDefault(c => c.StudentId == id);
                     if (result != null) db.Students.Remove(obj);
                     db.SaveChanges();
 

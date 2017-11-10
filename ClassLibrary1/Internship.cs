@@ -17,7 +17,7 @@ namespace ClassLibrary1
         public int InternshipId { get; set; }
         public Nullable<int> CompanyId { get; set; }
         public Nullable<int> StudentId { get; set; }
-        public Nullable<System.DateTime> year { get; set; }
+        public Nullable<System.DateTime> InternshipYear { get; set; }
     
         public virtual Companies Companies { get; set; }
         public virtual Students Students { get; set; }
