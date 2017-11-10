@@ -9,7 +9,7 @@ namespace DBDomain
     using DBDomain;
     using System.Reflection;
 
-    public partial class StageObxContext : DbContext
+    public class StageObxContext : DbContext
     {
 
         public virtual DbSet<Companies> Companies { get; set; }

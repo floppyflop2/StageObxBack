@@ -1,14 +1,13 @@
 ﻿using BusinessLogic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using DBDomain;
 namespace Operations
 {
     public static class Operation
     {
+
+        public static readonly StageObxContext db ;
+
+
         public static object Get(string caller)
         {
             return GetBusinessLogic(caller).Get();
@@ -22,13 +21,13 @@ namespace Operations
 
         public static void Remove(string caller, object obj)
         {
-             GetBusinessLogic(caller).Remove(obj);
+            GetBusinessLogic(caller).Remove(obj);
         }
 
 
         public static void Modify(string caller, object obj)
         {
-             GetBusinessLogic(caller).Modify(obj);
+            GetBusinessLogic(caller).Modify(obj);
         }
 
 
@@ -37,14 +36,17 @@ namespace Operations
             switch (caller)
             {
                 case "Student":
-                    return new StudentBusinessLogic();
+
+                    return new StudentBusinessLogic(db);
                 case "Contact":
-                    return new ContactBusinessLogic();
+
+                    return new ContactBusinessLogic(db);
                 case "Documents":
-                    return new InternshipBusinessLogic();
+
+                    return new InternshipBusinessLogic(db);
                 case "Company":
-                    return new CompanyBusinessLogic();  
-                   
+                    return new CompanyBusinessLogic(db);
+
                 default:
                     return null;
             }
