@@ -52,7 +52,8 @@ namespace BusinessLogic
 
         }
 
-        public int StudentCheck(object obj){
+        public override int Check(object obj)
+        {
             var result = db.Students.Where(s => s.StudentEmail == obj.Email);
             if (result == null){
                 return -1;

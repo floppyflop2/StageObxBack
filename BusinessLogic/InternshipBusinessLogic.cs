@@ -53,7 +53,8 @@ namespace BusinessLogic
 
         }
 
-        public int InternshipCheck(object obj){
+        public override int Check(object obj)
+        {
             var result = db.Internship.Where(i => i.CompanyId  == obj.CompanyId && i.StudentId == obj.StudentId);
             if (result == null){
                 return -1;
