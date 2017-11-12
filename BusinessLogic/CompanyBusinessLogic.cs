@@ -52,7 +52,7 @@ namespace BusinessLogic
 
         }
 
-        public int CompanyCheck(object obj)
+        public override int Check(object obj)
         {
             var result = db.Companies.Where(c => c.CompanyName == obj.CompanyName);
             if (result == null){

@@ -18,6 +18,10 @@ namespace BusinessLogic
             throw new Exception("Not implemented for this object");
         }
 
+        public virtual int Check(object obj)
+        {
+            throw new Exception("Not implemented for this object");
+        }
 
         public virtual void Add(object obj)
         {

@@ -52,7 +52,7 @@ namespace BusinessLogic
 
         }
 
-        public int ContactCheck(object obj)
+        public override int Check(object obj)
         {
             var result = db.Contacts.Where(c => c.ContactEmail == obj.ContactEmail);
             if (result == null){
