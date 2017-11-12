@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using System.Data;
+using System.Data.Entity
 
 namespace BusinessLogic
 {
@@ -52,7 +54,7 @@ namespace BusinessLogic
 
         }
 
-        public int CompanyCheck(object obj)
+        public override int Check(object obj)
         {
             var result = db.Companies.Where(c => c.CompanyName == obj.CompanyName);
             if (result == null){
