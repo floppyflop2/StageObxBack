@@ -18,6 +18,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{5EBC9942-B207-4A56-A618-12DF8D9C98E3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{280AD477-4137-42AC-9AD7-370815DA994E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4ED5C9F9-5F76-4626-B421-265F430B0738} = {4ED5C9F9-5F76-4626-B421-265F430B0738}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Operations", "Operations\Operations.csproj", "{7FBA2FB0-06C1-4872-B671-D6053B4B2F71}"
 	ProjectSection(ProjectDependencies) = postProject

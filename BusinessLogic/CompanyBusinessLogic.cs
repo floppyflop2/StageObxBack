@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using System.Data;
-using System.Data.Entity
+using System.Data.Entity;
 
 namespace BusinessLogic
 {
