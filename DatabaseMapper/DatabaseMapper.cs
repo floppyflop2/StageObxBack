@@ -45,18 +45,28 @@ namespace DatabaseMapper
             };
         }
 
-        public static CompanyDTO MapToCompanyDTO(List<Companies> company)
+        public static List<CompanyDTO> MapToCompanyDTO(List<Companies> companies)
         {
-            return new CompanyDTO()
+            List<CompanyDTO> listOfCompanies = new List<CompanyDTO>();
+            companies.ForEach(w => listOfCompanies.Add(new CompanyDTO()
             {
-
-            };
+                Name = w.CompanyName,
+                City = w.CompanyCity,
+                StreetName = w.CompanyStreetName,
+                PostalCode = w.CompanyPostalCode,
+                Telephone = w.CompanyTelephone
+            }));
+            return listOfCompanies;
         }
 
         public static CompanyDTO MapToCompanyDTO(Companies company)
         {
             return new CompanyDTO(){
-                
+                Name = company.CompanyName,
+                City = company.CompanyCity,
+                StreetName = company.CompanyStreetName,
+                PostalCode = company.CompanyPostalCode,
+                Telephone = company.CompanyTelephone
             };
         }
 
