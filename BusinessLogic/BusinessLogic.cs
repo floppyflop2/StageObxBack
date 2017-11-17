@@ -8,12 +8,12 @@ namespace BusinessLogic
 {
     public abstract class BusinessLogic : IDisposable
     {
-        public virtual List<object> GetAll()
+        public virtual object GetAll()
         {
             throw new Exception("Not implemented for this object");
         }
 
-        public virtual object Get(int id)
+        public virtual object Get(object obj)
         {
             throw new Exception("Not implemented for this object");
         }
@@ -28,7 +28,7 @@ namespace BusinessLogic
             throw new Exception("Not implemented for this object");
         }
 
-        public virtual void Remove(int id)
+        public virtual void Remove(object obj)
         {
             throw new Exception("Not implemented for this object");
         }

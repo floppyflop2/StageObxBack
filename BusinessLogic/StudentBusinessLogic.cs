@@ -6,21 +6,16 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DatabaseMapper.DatabaseMapper;
 
 namespace BusinessLogic
 {
     public class StudentBusinessLogic : BusinessLogic
     {
-        private readonly StageObxContext db;
-
-        public StudentBusinessLogic(StageObxContext db)
+        
+        public override object GetAll()
         {
-            this.db = db;
-        }
-
-        public override List<object> GetAll()
-        {
-            List<object> compList = new List<object>();
+            object compList = new List<object>();
             try
             {
                 using (var db = new StageObxContext())
@@ -28,16 +23,17 @@ namespace BusinessLogic
                     compList = db.Students.ToList();
                 }
             }
-            catch
+            catch(Exception e)
             {
-
+                throw new Exception(e.Message);
             }
-            return compList;
+            return MapToStudentDTO((List<Students>)compList);
         }
 
-        public override object Get(int id)
+        public override object Get(object obj)
         {
             Students comp = new Students();
+            int id = Check(obj);
             try
             {
                 using (var db = new StageObxContext())
@@ -46,69 +42,75 @@ namespace BusinessLogic
                     comp = result;
                 }
             }
-            catch
-            { }
-            return comp;
+            catch (Exception e)
+            { throw new Exception(e.Message); }
+
+            return MapToStudentDTO(comp);
 
         }
 
         public override int Check(object obj)
         {
-            var result = db.Students.Where(s => s.StudentEmail == obj.Email);
-            if (result == null){
-                return -1;
-            }
-            else{
-                return result.StudentId;
+            try {
+                using(var db = new StageObxContext()){
+                    var result = db.Students.Where(s => s.StudentEmail == obj.Email);
+                    if (result == null)
+                    {
+                        return -1;
+                    }
+                    else
+                    {
+                        return result.StudentId;
+                    }
+                }
+            }catch(Exception e){
+                throw new Exception(e.Message);
             }
         }
 
         public override void Add(object obj)
         {
+            StudentDTO std = (StudentDTO)obj;
             try
             {
                 using (var db = new StageObxContext())
                 {
-                    //TODO effectuer verif pour les doublons 
-                    var result = db.Students.FirstOrDefault(c => c.StudentName == obj.Name);
-                    if (!obj.Equals((Students)result)) db.Students.Add((Students)obj);
+                    var result = db.Students.FirstOrDefault(c => c.StudentName == std.Name);
+                    if (!obj.Equals((Students)result)) 
+                        db.Students.Add(new Students(){
+                            StudentName = std.Name,
+                            StudentFirstName = std.FirstName,
+                            StudentDepartement = std.Departement,
+                            StudentDocument = std.Document,
+                            StudentEmail = std.Email,
+                            StudentTelephone = std.Telephone
+                        });
                     db.SaveChanges();
-
-                    /*
-                     * int studentMax = db.Students.Max(s => s.StudentId);
-                     * Students student = new Students(){StudentId = studentMax+1, StudentName = obj.StudentName, StudentFirstName = obj.StudentFirstName, StudentDepartement = obj.StudentDepartement, StudentTelephone = obj.StudentTelephone, StudentEmail = obj.StudentEmail};
-                     * db.Students.Add(student);
-                     * db.SaveChanges();
-                     * 
-                     * */
                 }
             }
-            catch
-            { }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
-        public override void Remove(int id)
+        public override void Remove(object obj)
         {
-
+            int id = Check(obj);
+            if (id == -1)
+                return;
             try
             {
                 using (var db = new StageObxContext())
                 {
-                    //TODO il faut typer pour le remove 
-                    var result = db.Students.FirstOrDefault(c => c.StudentId == id);
-                    if (result != null) db.Students.Remove(obj);
+                    db.Students.Remove(db.Students.First(w => w.StudentId == id));
                     db.SaveChanges();
-
-                    /*
-                     * var result = db.Students.Where(s => s.StudentId == obj.StudentId);
-                     * db.Students.Remove(result);
-                     * db.SaveChanges();
-                     * 
-                     * */
                 }
             }
-            catch
-            { }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
 
 
         }
@@ -116,34 +118,31 @@ namespace BusinessLogic
         public override void Modify(object obj)
         {
 
+            int id = Check(obj);
+            if (id == -1)
+                return;
+            StudentDTO std = (StudentDTO)obj;
             try
             {
                 using (var db = new StageObxContext())
                 {
-                    var result = db.Students.FirstOrDefault(c => c.StudentId == obj.id);
-                    if (result != null)
-                    {
-                        db.Students.Remove(result);
-                        db.Students.Add((Students)obj);
-                        db.SaveChanges();
-                    }
-
-                    /*
-                     * var result = db.Students.Where(s => s.StudentId == obj.StudentId);
-                     * db.Companies.Remove(result);
-                     * db.Companies.Add((Students)obj);
-                     * db.SaveChanges();
-                     * 
-                     * */
+                    db.Students.Remove(db.Students.First(w => w.StudentId == id));
+                    db.Students.Add(new Students()
+                        {
+                            StudentName = std.Name,
+                            StudentFirstName = std.FirstName,
+                            StudentDepartement = std.Departement,
+                            StudentDocument = std.Document,
+                            StudentEmail = std.Email,
+                            StudentTelephone = std.Telephone
+                        });                    
+                    db.SaveChanges();
                 }
             }
-            catch
-            { }
-        }
-
-        public override void Dispose()
-        {
-            base.Dispose();
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }
