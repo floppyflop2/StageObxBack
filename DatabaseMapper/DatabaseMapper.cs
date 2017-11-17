@@ -45,6 +45,14 @@ namespace DatabaseMapper
             };
         }
 
+        public static CompanyDTO MapToCompanyDTO(List<Companies> company)
+        {
+            return new CompanyDTO()
+            {
+
+            };
+        }
+
         public static CompanyDTO MapToCompanyDTO(Companies company)
         {
             return new CompanyDTO(){

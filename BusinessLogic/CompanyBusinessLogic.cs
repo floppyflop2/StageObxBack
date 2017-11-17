@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using static DatabaseMapper.DatabaseMapper;
 
 namespace BusinessLogic
 {
@@ -11,16 +12,9 @@ namespace BusinessLogic
     {
 
 
-        private readonly StageObxContext db;
-
-        public CompanyBusinessLogic(StageObxContext db)
+        public override object GetAll()
         {
-            this.db = db;
-        }
-
-        public override List<object> GetAll()
-        {
-            List<object> compList = new List<object>();
+            object compList = new List<object>();
             try
             {
                 using (var db = new StageObxContext())
@@ -28,16 +22,17 @@ namespace BusinessLogic
                     compList = db.Companies.ToList();
                 }
             }
-            catch
+            catch(Exception e)
             {
-
+                throw new Exception(e.Message);
             }
-            return compList;
+            return MapToCompanyDTO((List<Companies>)compList);
         }
 
-        public override object Get(int id)
+        public override object Get(object obj)
         {
             Companies comp = new Companies();
+            int id = Check(obj);
             try
             {
                 using (var db = new StageObxContext())
@@ -46,99 +41,109 @@ namespace BusinessLogic
                     comp = result;
                 }
             }
-            catch
-            {            }
-            return comp;
+            catch (Exception e)
+            { throw new Exception(e.Message); }
+            return MapToCompanyDTO(comp);
 
         }
 
         public override int Check(object obj)
         {
-            var result = db.Companies.Where(c => c.CompanyName == obj.CompanyName);
-            if (result == null){
-                return -1;
+            try
+            {
+                using (var db = new StageObxContext())
+                {
+                    var result = db.Companies.Where(c => c.CompanyName == obj.Name);
+                    if (result == null)
+                    {
+                        return -1;
+                    }
+                    else
+                    {
+                        return result.CompanyId;
+                    }
+                }
+            }catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
-            else{
-                return result.CompanyId;
-            }
+
         }
 
         public override void Add(object obj)
         {
+            CompanyDTO cpn = (CompanyDTO)obj;
             try
             {
                 using (var db = new StageObxContext())
                 {
-                    //TODO effectuer verif pour les doublons 
-                    var result = db.Companies.FirstOrDefault(c => c.companyName == obj.Name);
-                    if (!obj.Equals((Companies)result)) db.Companies.Add((Companies)obj);
+                    var result = db.Companies.FirstOrDefault(c => c.CompanyName == cpn.Name);
+                    if (!obj.Equals((Companies)result))
+                        db.Companies.Add(new Companies() {
+                            CompanyName = cpn.Name,
+                            CompanyCity = cpn.City,
+                            CompanyStreetName = cpn.StreetName,
+                            CompanyPostalCode = cpn.PostalCode,
+                            CompanyTelephone = cpn.Telephone
+                        });
                     db.SaveChanges();
-
-                    /*
-                     * int companyMax = db.Companies.Max(c => c.CompanyId);
-                     * Companies company = new Companies(){CompanyId = companyMax+1, CompanyName = obj.CompanyName , CompanyCity = obj.CompanyCity, CompanyStreetName = obj.CompanyStreetName, CompanyPostalCode = obj.CompanyPostalCode, CompanyTelephone = obj.CompanyTelephone};
-                     * db.Companies.Add(company);
-                     * db.SaveChanges();
-                     * 
-                     * */
                 }
             }
-            catch
-            { }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
-        public override void Remove(int id)
+        public override void Remove(object obj)
         {
-
+            int id = Check(obj);
+            if (id == -1)
+                return;
             try
             {
                 using (var db = new StageObxContext())
                 {
-                 //TODO il faut typer pour le remove 
-                    var result = db.Companies.FirstOrDefault(c => c.CompanyId ==  id);
-                    if (result != null) db.Companies.Remove(obj);
+                    db.Companies.Remove(db.Companies.First(w => w.CompanyId == id));
                     db.SaveChanges();
-
-                    /*
-                     * var result = db.Companies.Where(c => c.CompanyId == id);
-                     * db.Companies.Remove(result);
-                     * db.SaveChanges();
-                     * 
-                     * */
                 }
             }
-            catch
-            { }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
 
 
         }
 
         public override void Modify(object obj)
         {
-            
+            int id = Check(obj);
+            if (id == -1)
+                return;
+            CompanyDTO cpn = (CompanyDTO)obj;
             try
             {
                 using (var db = new StageObxContext())
                 {
-                    var result = db.Companies.FirstOrDefault(c => c.CompanyId == obj.id);
-                    if (result != null)
+                    db.Companies.Remove(db.Companies.First(w => w.CompanyId == id));
+                    db.Companies.Add(new Companies()
                     {
-                        db.Companies.Remove(result);
-                        db.Companies.Add((Companies)obj);
-                        db.SaveChanges();
-                    }
+                        CompanyName = cpn.Name,
+                        CompanyCity = cpn.City,
+                        CompanyStreetName = cpn.StreetName,
+                        CompanyPostalCode = cpn.PostalCode,
+                        CompanyTelephone = cpn.Telephone
 
-                    /*
-                     * var result = db.Companies.Where(c => c.CompanyId == obj.CompanyId);
-                     * db.Companies.Remove(result);
-                     * db.Companies.Add((Companies)obj);
-                     * db.SaveChanges();
-                     * 
-                     * */
+                    });
+                    db.SaveChanges();
+
                 }
             }
-            catch
-            { }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public override void Dispose()

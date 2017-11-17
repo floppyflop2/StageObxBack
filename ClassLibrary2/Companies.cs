@@ -30,7 +30,9 @@ namespace DBDomain
         [StringLength(30)]
         public string CompanyStreetName { get; set; }
 
-        public int CompanyPostalCode { get; set; }
+        [Required]
+        [StringLength(20)]
+        public string CompanyPostalCode { get; set; }
 
         [Required]
         [StringLength(20)]
