@@ -6,13 +6,14 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Util;
 using static DatabaseMapper.DatabaseMapper;
 
 namespace BusinessLogic
 {
     public class StudentBusinessLogic : BusinessLogic
     {
-        
+        Logger log = new Logger();
         public override object GetAll()
         {
             object compList = new List<object>();

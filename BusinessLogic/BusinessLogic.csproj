@@ -75,6 +75,10 @@
       <Project>{A8665638-20F9-4C13-BA3C-D3A85C0F19F7}</Project>
       <Name>DBDomain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ClassLibrary3\Util.csproj">
+      <Project>{4ed5c9f9-5f76-4626-b421-265f430b0738}</Project>
+      <Name>Util</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DatabaseMapper\DatabaseMapper.csproj">
       <Project>{aa307f8a-e63a-45a5-b132-77737be558e0}</Project>
       <Name>DatabaseMapper</Name>

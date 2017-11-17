@@ -13,6 +13,7 @@ namespace Util
         private string DatetimeFormat;
         private string Filename;
 
+        public Logger() { }
         /// <summary>
         /// Initialize a new instance of SimpleLogger class.
         /// Log file will be created automatically if not yet exists, else it can be either a fresh new file or append to the existing file.
