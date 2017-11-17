@@ -5,9 +5,6 @@ namespace Operations
     public static class Operation
     {
 
-        public static readonly StageObxContext db ;
-
-
         public static object Get(string caller)
         {
             return GetBusinessLogic(caller).Get();
@@ -42,15 +39,15 @@ namespace Operations
             {
                 case "Student":
 
-                    return new StudentBusinessLogic(db);
+                    return new StudentBusinessLogic();
                 case "Contact":
 
-                    return new ContactBusinessLogic(db);
+                    return new ContactBusinessLogic();
                 case "Documents":
 
-                    return new InternshipBusinessLogic(db);
+                    return new InternshipBusinessLogic();
                 case "Company":
-                    return new CompanyBusinessLogic(db);
+                    return new CompanyBusinessLogic();
 
                 default:
                     return null;

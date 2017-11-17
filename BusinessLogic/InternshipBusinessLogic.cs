@@ -12,16 +12,9 @@ namespace BusinessLogic
     public class InternshipBusinessLogic : BusinessLogic
     {
 
-        private readonly StageObxContext db;
-
-        public InternshipBusinessLogic(StageObxContext db)
+        public override object GetAll()
         {
-            this.db = db;
-        }
-
-        public override List<object> GetAll()
-        {
-            List<object> compList = new List<object>();
+            object compList = new List<object>();
             try
             {
                 using (var db = new StageObxContext())
@@ -29,9 +22,9 @@ namespace BusinessLogic
                     compList = db.Internship.ToList();
                 }
             }
-            catch
+            catch(Exception e)
             {
-
+                throw new Exception(e.Message);
             }
             return compList;
         }
