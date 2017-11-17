@@ -5,9 +5,9 @@ namespace Operations
     public static class Operation
     {
 
-        public static object Get(string caller)
+        public static object Get(string caller, object obj)
         {
-            return GetBusinessLogic(caller).Get();
+            return GetBusinessLogic(caller).Get(obj);
         }
 
          public static int Check(string caller, object obj)
