@@ -7,7 +7,7 @@ CREATE TABLE Companies (
 	CompanyName varchar (255) NOT NULL ,
 	City varchar(30) NOT NULL ,
 	Streetname varchar(30) NOT NULL ,
-	Postal_code int NOT NULL ,
+	Postal_code varchar(20) NOT NULL ,
 	CompanyTelephone varchar (20) NOT NULL 
 ) 
 
