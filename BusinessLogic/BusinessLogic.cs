@@ -40,6 +40,7 @@ namespace BusinessLogic
 
         public virtual void Dispose()
         {
+
         }
     }
 }

@@ -22,7 +22,7 @@ namespace BusinessLogic
                     compList = db.Internship.ToList();
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
@@ -48,11 +48,13 @@ namespace BusinessLogic
 
         public override int Check(object obj)
         {
-            var result = db.Internship.Where(i => i.CompanyId  == obj.CompanyId && i.StudentId == obj.StudentId);
-            if (result == null){
+            var result = db.Internship.Where(i => i.CompanyId == obj.CompanyId && i.StudentId == obj.StudentId);
+            if (result == null)
+            {
                 return -1;
             }
-            else{
+            else
+            {
                 return result.InternshipId;
             }
         }

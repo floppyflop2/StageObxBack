@@ -10,20 +10,7 @@ namespace DatabaseMapper
 {
     public static class DatabaseMapper
     {
-        public static List<StudentDTO> MapToStudentDTO(List<Students> student)
-        {
-            List<StudentDTO> listOfStudents = new List<StudentDTO>();
-            student.ForEach(w => listOfStudents.Add(new StudentDTO()
-            {
-                FirstName = w.StudentFirstName,
-                Name = w.StudentName,
-                Departement = w.StudentDepartement,
-                Document = w.StudentDocument,
-                Email = w.StudentEmail,
-                Telephone = w.StudentTelephone
-            }));
-            return listOfStudents;
-        }
+
 
         public static StudentDTO MapToStudentDTO(Students student)
         {
@@ -38,30 +25,37 @@ namespace DatabaseMapper
             };
         }
 
+        public static List<StudentDTO> MapToStudentDTO(List<Students> student)
+        {
+            List<StudentDTO> listOfStudents = new List<StudentDTO>();
+            student.ForEach(s => listOfStudents.Add(MapToStudentDTO(s)));
+            return listOfStudents;
+        }
+
         public static ContactDTO MapToContactDTO(Contacts contact)
         {
-            return new ContactDTO(){
-                
+            return new ContactDTO()
+            {
+                ContactName = contact.ContactName,
+                ContactFirstName = contact.ContactFirstName,
+                ContactTelephone = contact.ContactTelephone,
+                ContactEmail = contact.ContactEmail
             };
         }
 
-        public static List<CompanyDTO> MapToCompanyDTO(List<Companies> companies)
+        public static List<ContactDTO> MapToContactDTO(List<Contacts> contacts)
         {
-            List<CompanyDTO> listOfCompanies = new List<CompanyDTO>();
-            companies.ForEach(w => listOfCompanies.Add(new CompanyDTO()
-            {
-                Name = w.CompanyName,
-                City = w.CompanyCity,
-                StreetName = w.CompanyStreetName,
-                PostalCode = w.CompanyPostalCode,
-                Telephone = w.CompanyTelephone
-            }));
-            return listOfCompanies;
+            List<ContactDTO> contactsList = new List<ContactDTO>();
+            contacts.ForEach(c => contactsList.Add(MapToContactDTO(c)));
+
+            return contactsList;
         }
+
 
         public static CompanyDTO MapToCompanyDTO(Companies company)
         {
-            return new CompanyDTO(){
+            return new CompanyDTO()
+            {
                 Name = company.CompanyName,
                 City = company.CompanyCity,
                 StreetName = company.CompanyStreetName,
@@ -70,11 +64,25 @@ namespace DatabaseMapper
             };
         }
 
+
+        public static List<CompanyDTO> MapToCompanyDTO(List<Companies> companies)
+        {
+            List<CompanyDTO> listOfCompanies = new List<CompanyDTO>();
+            companies.ForEach(w => listOfCompanies.Add(MapToCompanyDTO(w)));
+            return listOfCompanies;
+        }
+
         public static InternshipDTO MapToInternshipDTO(Internship internship)
         {
-            return new InternshipDTO(){
-                
+            return new InternshipDTO()
+            {
+
             };
         }
+
     }
+
+
+
 }
+
