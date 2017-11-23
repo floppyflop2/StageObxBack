@@ -13,7 +13,7 @@ namespace BusinessLogic
 {
     public class StudentBusinessLogic : BusinessLogic
     {
-        Logger log = new Logger();
+        Logger logger = new Logger();
         public override object GetAll()
         {
             object compList = new List<object>();
@@ -24,8 +24,9 @@ namespace BusinessLogic
                     compList = db.Students.ToList();
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
+                logger.Error(e.Message + "GetAllStudent impossible");
                 throw new Exception(e.Message);
             }
             return MapToStudentDTO((List<Students>)compList);
@@ -44,7 +45,10 @@ namespace BusinessLogic
                 }
             }
             catch (Exception e)
-            { throw new Exception(e.Message); }
+            {
+                logger.Error(e.Message + "GetStudent impossible");
+                throw new Exception(e.Message);
+            }
 
             return MapToStudentDTO(comp);
 
@@ -52,19 +56,26 @@ namespace BusinessLogic
 
         public override int Check(object obj)
         {
-            try {
-                using(var db = new StageObxContext()){
-                    var result = db.Students.Where(s => s.StudentEmail == obj.Email);
+
+            StudentDTO stud = (StudentDTO)obj;
+            try
+            {
+                using (var db = new StageObxContext())
+                {
+                    var result = db.Students.Where(s => s.StudentEmail == stud.Email);
                     if (result == null)
                     {
                         return -1;
                     }
                     else
                     {
-                        return result.StudentId;
+                        return result.SingleOrDefault().StudentId;
                     }
                 }
-            }catch(Exception e){
+            }
+            catch (Exception e)
+            {
+                logger.Error(e.Message + "Check Error");
                 throw new Exception(e.Message);
             }
         }
@@ -77,8 +88,9 @@ namespace BusinessLogic
                 using (var db = new StageObxContext())
                 {
                     var result = db.Students.FirstOrDefault(c => c.StudentName == std.Name);
-                    if (!obj.Equals((Students)result)) 
-                        db.Students.Add(new Students(){
+                    if (!obj.Equals((Students)result))
+                        db.Students.Add(new Students()
+                        {
                             StudentName = std.Name,
                             StudentFirstName = std.FirstName,
                             StudentDepartement = std.Departement,
@@ -89,8 +101,9 @@ namespace BusinessLogic
                     db.SaveChanges();
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
+                logger.Error(e.Message + "AddStudent Error");
                 throw new Exception(e.Message);
             }
         }
@@ -108,8 +121,9 @@ namespace BusinessLogic
                     db.SaveChanges();
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
+                logger.Error(e.Message + "RemoveStudent Error");
                 throw new Exception(e.Message);
             }
 
@@ -129,19 +143,20 @@ namespace BusinessLogic
                 {
                     db.Students.Remove(db.Students.First(w => w.StudentId == id));
                     db.Students.Add(new Students()
-                        {
-                            StudentName = std.Name,
-                            StudentFirstName = std.FirstName,
-                            StudentDepartement = std.Departement,
-                            StudentDocument = std.Document,
-                            StudentEmail = std.Email,
-                            StudentTelephone = std.Telephone
-                        });                    
+                    {
+                        StudentName = std.Name,
+                        StudentFirstName = std.FirstName,
+                        StudentDepartement = std.Departement,
+                        StudentDocument = std.Document,
+                        StudentEmail = std.Email,
+                        StudentTelephone = std.Telephone
+                    });
                     db.SaveChanges();
                 }
             }
             catch (Exception e)
             {
+                logger.Error(e.Message + "ModifyStudent Error");
                 throw new Exception(e.Message);
             }
         }

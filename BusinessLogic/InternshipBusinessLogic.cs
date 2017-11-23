@@ -6,12 +6,13 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Util;
 
 namespace BusinessLogic
 {
     public class InternshipBusinessLogic : BusinessLogic
     {
-
+        Logger logger = new Logger();
         public override object GetAll()
         {
             object compList = new List<object>();
@@ -41,14 +42,18 @@ namespace BusinessLogic
                 }
             }
             catch
-            { }
+            {
+                logger.Error(e.Message + "GetInternShip Error");
+                throw new Exception(e.Message);
+            }
             return comp;
 
         }
 
         public override int Check(object obj)
         {
-            var result = db.Internship.Where(i => i.CompanyId == obj.CompanyId && i.StudentId == obj.StudentId);
+            InternshipDTO internship = (InternshipDTO)obj;
+            var result = db.Internship.Where(i => i.CompanyId == internship.CompanyId && i.StudentId == internship.StudentId);
             if (result == null)
             {
                 return -1;

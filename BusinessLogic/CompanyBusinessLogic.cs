@@ -5,12 +5,13 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using static DatabaseMapper.DatabaseMapper;
+using Util;
 
 namespace BusinessLogic
 {
     public class CompanyBusinessLogic : BusinessLogic
     {
-
+        Logger logger = new Logger();
 
         public override object GetAll()
         {
@@ -22,8 +23,9 @@ namespace BusinessLogic
                     compList = db.Companies.ToList();
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
+                logger.Error(e.Message + "GetAllCompany impossible");
                 throw new Exception(e.Message);
             }
             return MapToCompanyDTO((List<Companies>)compList);
@@ -42,28 +44,34 @@ namespace BusinessLogic
                 }
             }
             catch (Exception e)
-            { throw new Exception(e.Message); }
+            {
+                logger.Error(e.Message + "GetCompany impossible");
+                throw new Exception(e.Message);
+            }
             return MapToCompanyDTO(comp);
 
         }
 
         public override int Check(object obj)
         {
+
+            CompanyDTO comp = (CompanyDTO)obj;
             try
             {
                 using (var db = new StageObxContext())
                 {
-                    var result = db.Companies.Where(c => c.CompanyName == obj.Name);
+                    var result = db.Companies.Where(c => c.CompanyName == comp.Name);
                     if (result == null)
                     {
                         return -1;
                     }
                     else
                     {
-                        return result.CompanyId;
+                        return result.SingleOrDefault().CompanyId;
                     }
                 }
-            }catch (Exception e)
+            }
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
@@ -79,7 +87,8 @@ namespace BusinessLogic
                 {
                     var result = db.Companies.FirstOrDefault(c => c.CompanyName == cpn.Name);
                     if (!obj.Equals((Companies)result))
-                        db.Companies.Add(new Companies() {
+                        db.Companies.Add(new Companies()
+                        {
                             CompanyName = cpn.Name,
                             CompanyCity = cpn.City,
                             CompanyStreetName = cpn.StreetName,
@@ -91,6 +100,7 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
+                logger.Error(e.Message + "unable to add company");
                 throw new Exception(e.Message);
             }
         }
@@ -110,6 +120,7 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
+                logger.Error(e.Message + "unable to remove a company");
                 throw new Exception(e.Message);
             }
 
@@ -142,6 +153,7 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
+                logger.Error(e.Message + "unable to modify company");
                 throw new Exception(e.Message);
             }
         }

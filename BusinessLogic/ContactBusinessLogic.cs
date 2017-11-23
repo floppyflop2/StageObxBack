@@ -7,18 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Util;
+using DatabaseMapper;
 
 namespace BusinessLogic
 {
     public class ContactBusinessLogic : BusinessLogic
     {
-        private readonly StageObxContext db;
+
         Logger logger = new Logger();
 
-        public ContactBusinessLogic(StageObxContext db)
-        {
-            this.db = db;
-        }
+        public ContactBusinessLogic() { }
 
         public override object GetAll()
         {
@@ -35,7 +33,8 @@ namespace BusinessLogic
                 logger.Error(e.Message + "GetAll impossible");
                 throw new Exception(e.Message);
             }
-            return MapToContactDTO((List<Contacts>)compList);
+
+            return DatabaseMapper.DatabaseMapper.MapToContactDTO((List<Contacts>)compList);
         }
 
         public override object Get(object obj)
@@ -52,23 +51,36 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
-                logger.Error(e.Message + "Get impossible");
+                logger.Error(e.Message + "GetContact impossible");
                 throw new Exception(e.Message);
             }
-            return MapToContactDTO(comp);
+            return DatabaseMapper.DatabaseMapper.MapToContactDTO(comp);
 
         }
 
         public override int Check(object obj)
         {
-            var result = db.Contacts.Where(c => c.ContactEmail == obj.ContactEmail);
-            if (result == null)
+
+            ContactDTO cont = (ContactDTO)obj;
+            try
             {
-                return -1;
+                using (var db = new StageObxContext())
+                {
+                    var result = db.Contacts.Where(c => c.ContactEmail == cont.ContactEmail);
+                    if (result == null)
+                    {
+                        return -1;
+                    }
+                    else
+                    {
+                        return result.SingleOrDefault().ContactId;
+                    }
+                }
             }
-            else
+            catch (Exception e)
             {
-                return result.ContactId;
+                logger.Error(e.Message + "Check Error");
+                throw new Exception(e.Message);
             }
         }
 
@@ -96,6 +108,7 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
+                logger.Error(e.Message + "addContact impossible");
                 throw new Exception(e.Message);
             }
         }
@@ -151,7 +164,7 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
-                logger.Error(e.Message + "unable to remove contact");
+                logger.Error(e.Message + "unable to modify contact");
                 throw new Exception(e.Message);
             }
         }
