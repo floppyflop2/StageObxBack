@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.Entity;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -17,6 +18,8 @@ namespace DBDomain
         TrustServerCertificate=False;Connection Timeout=30;
 
     */
+
+    [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class StageObxContextConfiguration : DbConfiguration
     {
         public StageObxContextConfiguration()

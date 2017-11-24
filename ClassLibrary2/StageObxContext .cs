@@ -8,7 +8,9 @@ namespace DBDomain
     using System.Data.Entity.Core.Objects;
     using DBDomain;
     using System.Reflection;
+    using MySql.Data.Entity;
 
+    [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class StageObxContext : DbContext
     {
 
