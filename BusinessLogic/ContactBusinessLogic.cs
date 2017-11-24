@@ -84,7 +84,7 @@ namespace BusinessLogic
             }
         }
 
-        public override void Add(object obj)
+        public override object Add(object obj)
         {
             ContactDTO cont = (ContactDTO)obj;
             try
@@ -111,6 +111,7 @@ namespace BusinessLogic
                 logger.Error(e.Message + "addContact impossible");
                 throw new Exception(e.Message);
             }
+            return "";
         }
 
         public override void Remove(object obj)

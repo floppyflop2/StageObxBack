@@ -23,7 +23,7 @@ namespace BusinessLogic
             throw new Exception("Not implemented for this object");
         }
 
-        public virtual void Add(object obj)
+        public virtual object Add(object obj)
         {
             throw new Exception("Not implemented for this object");
         }

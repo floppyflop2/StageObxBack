@@ -80,7 +80,7 @@ namespace BusinessLogic
             }
         }
 
-        public override void Add(object obj)
+        public override object Add(object obj)
         {
             StudentDTO std = (StudentDTO)obj;
             try
@@ -106,6 +106,7 @@ namespace BusinessLogic
                 logger.Error(e.Message + "AddStudent Error");
                 throw new Exception(e.Message);
             }
+            return "";
         }
 
         public override void Remove(object obj)
