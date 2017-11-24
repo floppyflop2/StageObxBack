@@ -26,7 +26,10 @@ namespace DBDomain
         public StageObxContext(string connectionstring) : base(connectionstring)
         {
         }
+        public StageObxContext(DbConnection existingConnection, bool contextOwnsConnection) : base(existingConnection, contextOwnsConnection)
+        {
 
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
