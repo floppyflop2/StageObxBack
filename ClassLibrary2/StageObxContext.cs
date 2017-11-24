@@ -8,7 +8,10 @@ namespace DBDomain
     using System.Data.Entity.Core.Objects;
     using DBDomain;
     using System.Reflection;
+    using MySql.Data.Entity;
+    using MySql.Data.MySqlClient;
 
+    [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class StageObxContext : DbContext
     {
 
@@ -19,12 +22,19 @@ namespace DBDomain
 
         public StageObxContext() : base("name=StageObxModel")
         {
+            DbConfiguration.SetConfiguration(new MySqlEFConfiguration());
         }
 
         public StageObxContext(string connectionstring) : base(connectionstring)
         {
+            DbConfiguration.SetConfiguration(new MySqlEFConfiguration());
         }
 
+        public StageObxContext(DbConnection existingConnection, bool contextOwnsConnection)
+            : base(existingConnection, contextOwnsConnection)
+        {
+            DbConfiguration.SetConfiguration(new MySqlEFConfiguration());
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -34,6 +44,10 @@ namespace DBDomain
                 .WillCascadeOnDelete(false);
         }
 
+
     }
 
+
+
 }
+
