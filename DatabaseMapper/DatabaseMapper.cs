@@ -16,12 +16,17 @@ namespace DatabaseMapper
         {
             return new StudentDTO()
             {
+                Id = student.StudentId,
                 FirstName = student.StudentFirstName,
                 Name = student.StudentName,
                 Departement = student.StudentDepartement,
                 Document = student.StudentDocument,
                 Email = student.StudentEmail,
-                Telephone = student.StudentTelephone
+                Telephone = student.StudentTelephone,
+                Token = student.Token,
+                StartTime = xxx,
+                ValidityPeriod = yyyy
+
             };
         }
 
@@ -36,6 +41,7 @@ namespace DatabaseMapper
         {
             return new ContactDTO()
             {
+                Id = contact.ContactId,
                 ContactName = contact.ContactName,
                 ContactFirstName = contact.ContactFirstName,
                 ContactTelephone = contact.ContactTelephone,
@@ -56,6 +62,7 @@ namespace DatabaseMapper
         {
             return new CompanyDTO()
             {
+                Id = company.CompanyId,
                 Name = company.CompanyName,
                 City = company.CompanyCity,
                 StreetName = company.CompanyStreetName,
@@ -76,11 +83,12 @@ namespace DatabaseMapper
         {
             return new InternshipDTO()
             {
-
-            };
+                Id = internship.InternshipId,
+                Year = internship.InternshipYear
+            }
         }
 
-        public static List<CompanyDTO> MapToInternshipDTO(List<Internship> internships)
+        public static List<InternshipDTO> MapToInternshipDTO(List<Internship> internships)
         {
             List<InternshipDTO> listOfInternships = new List<InternshipDTO>();
             internships.ForEach(w => listOfInternships.Add(MapToInternshipDTO(w)));
