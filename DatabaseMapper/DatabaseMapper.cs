@@ -80,6 +80,13 @@ namespace DatabaseMapper
             };
         }
 
+        public static List<CompanyDTO> MapToInternshipDTO(List<Internship> internships)
+        {
+            List<InternshipDTO> listOfInternships = new List<InternshipDTO>();
+            internships.ForEach(w => listOfInternships.Add(MapToInternshipDTO(w)));
+            return listOfInternships;
+        }
+
     }
 
 

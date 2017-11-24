@@ -53,64 +53,62 @@ namespace BusinessLogic
         public override int Check(object obj)
         {
             InternshipDTO internship = (InternshipDTO)obj;
-            var result = db.Internship.Where(i => i.CompanyId == internship.CompanyId && i.StudentId == internship.StudentId);
-            if (result == null)
-            {
-                return -1;
-            }
-            else
-            {
-                return result.InternshipId;
+            var result = new Internship();
+            using (var db = new StageObxContext()){
+
+                result = db.Internship.Where(i => i.CompanyId == internship.CompanyId && i.StudentId == internship.StudentId);
+                if (result == null)
+                {
+                    return -1;
+                }
+                else
+                {
+                    return result.InternshipId;
+                }
             }
         }
 
         public override void Add(object obj)
         {
+            InternshipDTO internship = (InternshipDTO)obj;
             try
             {
                 using (var db = new StageObxContext())
                 {
-                    //TODO effectuer verif pour les doublons 
-                    // var result = db.Internship.FirstOrDefault(c => c.S == obj.Name);
-                    // if (!obj.Equals((Internship)result)) db.Internship.Add((Document)obj);
-                    db.Internship.Add(obj);
+                    var result = db.Internship.FirstOrDefault(c => c.InternshipId == internship.Id);
+                    if (!obj.Equals((Internship)result))
+                        db.Internship.Add(new Internship()
+                        {
+                            
+                        });
                     db.SaveChanges();
-
-                    /*
-                     * int internshipMax = db.Internship.Max(c => c.InternshipId);
-                     * Internship internship = new Internship(){InternshipId = internshipMax+1, CompanyId = obj.CompanyId, StudentId = obj.StudentId, InternshipYear = obj.InternshipYear};
-                     * db.Internship.Add(internship);
-                     * db.SaveChanges();
-                     * 
-                     * */
                 }
             }
-            catch
-            { }
+            catch (Exception e)
+            {
+                logger.Error(e.Message + "AddInternship Error");
+                throw new Exception(e.Message);
+            }
         }
 
-        public override void Remove(int id)
+        public override void Remove(object obj)
         {
-
+            int id = Check(obj);
+            if (id == -1)
+                return;
             try
             {
                 using (var db = new StageObxContext())
                 {
-                    //TODO il faut typer pour le remove 
-                    var result = db.Internship.FirstOrDefault(c => c.InternshipId == id);
-                    if (result != null) db.Internship.Remove(obj);
+                    db.Internship.Remove(db.Internship.First(w => w.InternshipId == id));
                     db.SaveChanges();
-
-                    /*
-                     * var result = db.Internship.Where(i => i.InternshipId == id);
-                     * db.Internship.Remove(result);
-                     * db.SaveChanges();
-                     * 
-                     * */
                 }
             }
-            catch
-            { }
+            catch (Exception e)
+            {
+                logger.Error(e.Message + "RemoveInternship Error");
+                throw new Exception(e.Message);
+            }
 
 
         }
@@ -118,34 +116,27 @@ namespace BusinessLogic
         public override void Modify(object obj)
         {
 
+            int id = Check(obj);
+            if (id == -1)
+                return;
+            InternshipDTO std = (InternshipDTO)obj;
             try
             {
                 using (var db = new StageObxContext())
                 {
-                    var result = db.Internship.FirstOrDefault(c => c.InternshipId == obj.id);
-                    if (result != null)
+                    db.Internship.Remove(db.Internship.First(w => w.InternshipId == id));
+                    db.Internship.Add(new Internship()
                     {
-                        db.Internship.Remove(result);
-                        db.Internship.Add((Internship)obj);
-                        db.SaveChanges();
-                    }
-
-                    /*
-                     * var result = db.Internship.Where(i => i.InternshipId == obj.InternshipId);
-                     * db.Companies.Remove(result);
-                     * db.Companies.Add((Internship)obj);
-                     * db.SaveChanges();
-                     * 
-                     * */
+                      
+                    });
+                    db.SaveChanges();
                 }
             }
-            catch
-            { }
-        }
-
-        public override void Dispose()
-        {
-            base.Dispose();
+            catch (Exception e)
+            {
+                logger.Error(e.Message + "ModifyInternship Error");
+                throw new Exception(e.Message);
+            }
         }
     }
 }

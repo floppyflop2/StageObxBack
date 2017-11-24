@@ -169,10 +169,6 @@ namespace BusinessLogic
             }
         }
 
-        public override void Dispose()
-        {
-            base.Dispose();
-        }
     }
 }
 

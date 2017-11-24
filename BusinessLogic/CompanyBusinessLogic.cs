@@ -157,10 +157,5 @@ namespace BusinessLogic
                 throw new Exception(e.Message);
             }
         }
-
-        public override void Dispose()
-        {
-            base.Dispose();
-        }
     }
 }
