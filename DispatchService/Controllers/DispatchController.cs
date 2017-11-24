@@ -13,29 +13,36 @@ namespace DispatchService.Controllers
     public class DispatchController : ApiController
     {
         [HttpPost]
-        public object Dispatch(RequestModel obj)
-        {
-            if (obj.Name == null)
-                return "Give a name tocard";
-            if (obj.Type == null)
-                return "Give me a type tocard";
+        [Route("{name:string}")]
+        public object DispatchPost(RequestModel obj, string name){
+            return name == null ? "Give a name" : Operation.Add(name, obj.FindCorrectDTO());
+        }
 
-            switch (obj.Type)
-            {
-                case "Get":
-                    return Operation.Get(obj.Name);
-                case "Add":
-                    Operation.Add(obj.Name, obj.FindCorrectDTO());
-                    return null;
-                case "Modify":
-                    Operation.Modify(obj.Name, obj.FindCorrectDTO());
-                    return null;
-                case "Remove":
-                    Operation.Remove(obj.Name, obj.FindCorrectDTO());
-                    return null;
-                default:
-                    return null;
-            }
+        [HttpGet]
+        [Route("{name:string}")]
+        public object DispatchGet(RequestModel obj, string name)
+        {
+            return name == null ? "Give a name" : Operation.Get(name, obj);
+        }
+
+        [HttpPut]
+        [Route("{name:string}")]
+        public object DispatchPut(RequestModel obj, string name)
+        {
+            if (name == null)
+                return "Give a name";
+            Operation.Modify(name, obj.FindCorrectDTO());
+            return "Ok";
+        }
+
+        [HttpDelete]
+        [Route("{name:string}")]
+        public object DispatchDelete(RequestModel obj, string name)
+        {
+            (name == null)
+                return "Give a name";
+            Operation.Remove(name, obj.FindCorrectDTO());
+            return "Ok";
         }
     }
 }

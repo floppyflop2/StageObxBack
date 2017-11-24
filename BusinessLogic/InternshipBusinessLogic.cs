@@ -13,6 +13,7 @@ namespace BusinessLogic
     public class InternshipBusinessLogic : BusinessLogic
     {
         Logger logger = new Logger();
+
         public override object GetAll()
         {
             object compList = new List<object>();
@@ -30,9 +31,12 @@ namespace BusinessLogic
             return compList;
         }
 
-        public override object Get(int id)
+        public override object Get(object obj)
         {
             Internship comp = new Internship();
+            int id = Check(obj);
+            if (id == -1)
+                throw new Exception("No internship found");
             try
             {
                 using (var db = new StageObxContext())
@@ -41,7 +45,7 @@ namespace BusinessLogic
                     comp = result;
                 }
             }
-            catch
+            catch(Exception e)
             {
                 logger.Error(e.Message + "GetInternShip Error");
                 throw new Exception(e.Message);
@@ -53,10 +57,8 @@ namespace BusinessLogic
         public override int Check(object obj)
         {
             InternshipDTO internship = (InternshipDTO)obj;
-            var result = new Internship();
             using (var db = new StageObxContext()){
-
-                result = db.Internship.Where(i => i.CompanyId == internship.CompanyId && i.StudentId == internship.StudentId);
+                var result = db.Internship.FirstOrDefault(i => i.CompanyId == internship.CompanyId && i.StudentId == internship.StudentId);
                 if (result == null)
                 {
                     return -1;
@@ -68,7 +70,7 @@ namespace BusinessLogic
             }
         }
 
-        public override void Add(object obj)
+        public override object Add(object obj)
         {
             InternshipDTO internship = (InternshipDTO)obj;
             try
@@ -89,6 +91,7 @@ namespace BusinessLogic
                 logger.Error(e.Message + "AddInternship Error");
                 throw new Exception(e.Message);
             }
+            return "";
         }
 
         public override void Remove(object obj)

@@ -8,8 +8,6 @@ namespace DispatchService.Models
 {
     public class RequestModel
     {
-        public string Name { get; set; }
-        public string Type { get; set; }
         public StudentDTO StudentDTO { get; set; }
         public InternshipDTO DocumentDTO { get; set; }
         public ContactDTO ContactDTO { get; set; }

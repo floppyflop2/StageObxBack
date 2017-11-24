@@ -78,7 +78,7 @@ namespace BusinessLogic
 
         }
 
-        public override void Add(object obj)
+        public override object Add(object obj)
         {
             CompanyDTO cpn = (CompanyDTO)obj;
             try
@@ -103,6 +103,7 @@ namespace BusinessLogic
                 logger.Error(e.Message + "unable to add company");
                 throw new Exception(e.Message);
             }
+            return "";
         }
 
         public override void Remove(object obj)
