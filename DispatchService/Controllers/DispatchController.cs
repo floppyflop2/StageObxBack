@@ -10,13 +10,10 @@ using System.Web.Http;
 
 namespace DispatchService.Controllers
 {
-    [RoutePrefix("app/machin")]
     public class DispatchController : ApiController
     {
-    
         [HttpPost]
-        [Route("blabla/{id:string}")]
-        public object Dispatch(RequestModel obj, string id)
+        public object Dispatch(RequestModel obj)
         {
             if (obj.Name == null)
                 return "Give a name tocard";
@@ -26,7 +23,7 @@ namespace DispatchService.Controllers
             switch (obj.Type)
             {
                 case "Get":
-                    return Operation.Get(obj.Name, obj.FindCorrectDTO());
+                    return Operation.Get(obj.Name);
                 case "Add":
                     Operation.Add(obj.Name, obj.FindCorrectDTO());
                     return null;
@@ -40,8 +37,5 @@ namespace DispatchService.Controllers
                     return null;
             }
         }
-
-       
-
     }
 }
