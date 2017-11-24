@@ -15,15 +15,15 @@ namespace Operations
             return GetBusinessLogic(caller).Check(obj);
         }
 
-        public static void Add(string caller, object obj)
+        public static object Add(string caller, object obj)
         {
-            GetBusinessLogic(caller).Add(obj);
+            return GetBusinessLogic(caller).Add(obj);
         }
 
 
-        public static void Remove(string caller, int id)
+        public static void Remove(string caller, object obj)
         {
-            GetBusinessLogic(caller).Remove(id);
+            GetBusinessLogic(caller).Remove(obj);
         }
 
 
@@ -38,17 +38,13 @@ namespace Operations
             switch (caller)
             {
                 case "Student":
-
                     return new StudentBusinessLogic();
                 case "Contact":
-
                     return new ContactBusinessLogic();
                 case "Documents":
-
                     return new InternshipBusinessLogic();
                 case "Company":
                     return new CompanyBusinessLogic();
-
                 default:
                     return null;
             }
