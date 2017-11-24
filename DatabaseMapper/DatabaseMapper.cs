@@ -1,10 +1,6 @@
 ﻿using DBDomain;
 using Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DatabaseMapper
 {
@@ -23,9 +19,9 @@ namespace DatabaseMapper
                 Document = student.StudentDocument,
                 Email = student.StudentEmail,
                 Telephone = student.StudentTelephone,
-                Token = student.Token,
-                StartTime = xxx,
-                ValidityPeriod = yyyy
+              //  Token = student.Token,
+            //    StartTime = xxx,
+          //      ValidityPeriod = yyyy
 
             };
         }
@@ -62,7 +58,7 @@ namespace DatabaseMapper
         {
             return new CompanyDTO()
             {
-                Id = company.CompanyId,
+               // Id = company.CompanyId,
                 Name = company.CompanyName,
                 City = company.CompanyCity,
                 StreetName = company.CompanyStreetName,
@@ -83,9 +79,9 @@ namespace DatabaseMapper
         {
             return new InternshipDTO()
             {
-                Id = internship.InternshipId,
-                Year = internship.InternshipYear
-            }
+                //        Id = internship.InternshipId,
+                //      Year = internship.InternshipYear
+            };
         }
 
         public static List<InternshipDTO> MapToInternshipDTO(List<Internship> internships)

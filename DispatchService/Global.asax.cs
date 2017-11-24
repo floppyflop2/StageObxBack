@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Diagnostics;
 using System.Web.Http;
-using System.Web.Routing;
 
 namespace DispatchService
 {
@@ -11,7 +8,15 @@ namespace DispatchService
     {
         protected void Application_Start()
         {
-            GlobalConfiguration.Configure(WebApiConfig.Register);
+            try
+            {
+                GlobalConfiguration.Configure(WebApiConfig.Register);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("lol");
+            }
+           
         }
     }
 }

@@ -87,10 +87,6 @@
       <Project>{5ebc9942-b207-4a56-a618-12df8d9c98e3}</Project>
       <Name>Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\StageObxDatabase\StageObxDatabase.csproj">
-      <Project>{1bb979d3-0af9-4ad9-9cf0-556c0ef4c6f3}</Project>
-      <Name>StageObxDatabase</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
