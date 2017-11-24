@@ -39,7 +39,7 @@ namespace DispatchService.Controllers
         [Route("{name:string}")]
         public object DispatchDelete(RequestModel obj, string name)
         {
-            (name == null)
+            if  (name == null)
                 return "Give a name";
             Operation.Remove(name, obj.FindCorrectDTO());
             return "Ok";
