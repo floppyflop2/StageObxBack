@@ -22,7 +22,7 @@ namespace DispatchService.Controllers
         [Route("{name:string}")]
         public object DispatchGet(RequestModel obj, string name)
         {
-            return name == null ? "Give a name" : Operation.Get(name, obj);
+            return name == null ? "Give a name" : Operation.Get(name, obj.FindCorrectDTO());
         }
 
         [HttpPut]
