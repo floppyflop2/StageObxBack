@@ -31,7 +31,8 @@ CREATE TABLE Students (
 	Departement varchar(5) NOT NULL ,
 	Studenttelephone varchar (20) NOT NULL ,
 	Studentemail varchar (30) NOT NULL ,
-	Documents BYTEA
+	Documents BYTEA,
+	JwtTokan varchar(MAX)
 ) 
 ;
 CREATE TABLE Internships

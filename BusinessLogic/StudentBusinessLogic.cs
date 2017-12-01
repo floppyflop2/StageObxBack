@@ -93,7 +93,8 @@ namespace BusinessLogic
                             StudentDepartement = std.Departement,
                             StudentDocument = std.Document,
                             StudentEmail = std.Email,
-                            StudentTelephone = std.Telephone
+                            StudentTelephone = std.Telephone,
+                            StudentToken = std.Token
                         });
                     db.SaveChanges();
                 }
@@ -147,7 +148,8 @@ namespace BusinessLogic
                         StudentDepartement = std.Departement,
                         StudentDocument = std.Document,
                         StudentEmail = std.Email,
-                        StudentTelephone = std.Telephone
+                        StudentTelephone = std.Telephone,
+                        StudentToken = std.Token
                     });
                     db.SaveChanges();
                 }
@@ -160,5 +162,3 @@ namespace BusinessLogic
         }
     }
 }
-
-

@@ -75,6 +75,7 @@ CREATE TABLE Students (
 	"Studenttelephone" nvarchar (20) NOT NULL ,
 	"Studentemail" nvarchar (30) NOT NULL ,
 	"document" varbinary(MAX),
+	"JwtToken" varchar(MAX),
 
 	CONSTRAINT "PK_Students" PRIMARY KEY  CLUSTERED 
 	(
