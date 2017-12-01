@@ -48,6 +48,9 @@
       <HintPath>..\packages\MySql.Data.Entity.6.10.4\lib\net452\MySql.Data.Entity.EF6.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -64,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLogic.cs" />
+    <Compile Include="JWT.cs" />
     <Compile Include="CompanyBusinessLogic.cs" />
     <Compile Include="ContactBusinessLogic.cs" />
     <Compile Include="InternshipBusinessLogic.cs" />
@@ -86,10 +90,6 @@
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{5ebc9942-b207-4a56-a618-12df8d9c98e3}</Project>
       <Name>Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StageObxDatabase\StageObxDatabase.csproj">
-      <Project>{1bb979d3-0af9-4ad9-9cf0-556c0ef4c6f3}</Project>
-      <Name>StageObxDatabase</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

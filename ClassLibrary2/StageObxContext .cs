@@ -1,13 +1,7 @@
 namespace DBDomain
 {
-    using System;
     using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
     using System.Data.Common;
-    using System.Data.Entity.Core.Objects;
-    using DBDomain;
-    using System.Reflection;
     using MySql.Data.Entity;
 
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
