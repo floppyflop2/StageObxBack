@@ -1,5 +1,11 @@
 ﻿using DispatchService.Models;
+using Newtonsoft.Json;
 using Operations;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 
 namespace DispatchService.Controllers
@@ -7,20 +13,20 @@ namespace DispatchService.Controllers
     public class DispatchController : ApiController
     {
         [HttpPost]
-        [Route("{name:string}")]
+        [Route("{name}")]
         public object DispatchPost(RequestModel obj, string name){
             return name == null ? "Give a name" : Operation.Add(name, obj.FindCorrectDTO());
         }
 
         [HttpGet]
-        [Route("{name:string}")]
+        [Route("{name}")]
         public object DispatchGet(RequestModel obj, string name)
         {
             return name == null ? "Give a name" : Operation.Get(name, obj.FindCorrectDTO());
         }
 
         [HttpPut]
-        [Route("{name:string}")]
+        [Route("{name}")]
         public object DispatchPut(RequestModel obj, string name)
         {
             if (name == null)
@@ -30,7 +36,7 @@ namespace DispatchService.Controllers
         }
 
         [HttpDelete]
-        [Route("{name:string}")]
+        [Route("{name}")]
         public object DispatchDelete(RequestModel obj, string name)
         {
             if  (name == null)
