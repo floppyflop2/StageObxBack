@@ -61,13 +61,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary2\DBDomain.csproj">
-      <Project>{A8665638-20F9-4C13-BA3C-D3A85C0F19F7}</Project>
-      <Name>DBDomain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{5ebc9942-b207-4a56-a618-12df8d9c98e3}</Project>
       <Name>Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StageobxDB\StageobxDB.csproj">
+      <Project>{2CB68C98-C706-4DCA-A1BE-3F3A1FB5B98D}</Project>
+      <Name>StageobxDB</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

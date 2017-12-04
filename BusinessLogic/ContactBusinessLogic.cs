@@ -1,5 +1,6 @@
 ﻿using DBDomain;
 using Models;
+using StageobxDB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace BusinessLogic
             object compList = new List<object>();
             try
             {
-                using (var db = new StageObxContext())
+                using (var db = new DBModel())
                 {
                     compList = db.Contacts.ToList();
                 }
@@ -30,16 +31,16 @@ namespace BusinessLogic
                 throw new Exception(e.Message);
             }
 
-            return DatabaseMapper.DatabaseMapper.MapToContactDTO((List<Contacts>)compList);
+            return DatabaseMapper.DatabaseMapper.MapToContactDTO((List<Contact>)compList);
         }
 
         public override object Get(object obj)
         {
-            Contacts comp = new Contacts();
+            Contact comp = new Contact();
             int id = Check(obj);
             try
             {
-                using (var db = new StageObxContext())
+                using (var db = new DBModel())
                 {
                     var result = db.Contacts.Where(c => c.CompanyId == id).FirstOrDefault();
                     comp = result;
@@ -60,7 +61,7 @@ namespace BusinessLogic
             ContactDTO cont = (ContactDTO)obj;
             try
             {
-                using (var db = new StageObxContext())
+                using (var db = new DBModel())
                 {
                     var result = db.Contacts.Where(c => c.ContactEmail == cont.ContactEmail);
                     if (result == null)
@@ -85,12 +86,12 @@ namespace BusinessLogic
             ContactDTO cont = (ContactDTO)obj;
             try
             {
-                using (var db = new StageObxContext())
+                using (var db = new DBModel())
                 {
 
                     var result = db.Contacts.FirstOrDefault(c => c.ContactName == cont.ContactName);
-                    if (!obj.Equals((Contacts)result))
-                        db.Contacts.Add(new Contacts()
+                    if (!obj.Equals((Contact)result))
+                        db.Contacts.Add(new Contact()
                         {
                             ContactName = cont.ContactName,
                             ContactFirstName = cont.ContactFirstName,
@@ -120,7 +121,7 @@ namespace BusinessLogic
             }
             try
             {
-                using (var db = new StageObxContext())
+                using (var db = new DBModel())
                 {
 
                     var result = db.Contacts.Remove(db.Contacts.FirstOrDefault(c => c.ContactId == id));
@@ -147,9 +148,9 @@ namespace BusinessLogic
             ContactDTO cont = (ContactDTO)obj;
             try
             {
-                using (var db = new StageObxContext())
+                using (var db = new DBModel())
                 {
-                    db.Contacts.Add(new Contacts()
+                    db.Contacts.Add(new Contact()
                     {
                         ContactName = cont.ContactName,
                         ContactFirstName = cont.ContactFirstName,

@@ -68,10 +68,6 @@
       <Project>{280ad477-4137-42ac-9ad7-370815da994e}</Project>
       <Name>BusinessLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ClassLibrary2\DBDomain.csproj">
-      <Project>{a8665638-20f9-4c13-ba3c-d3a85c0f19f7}</Project>
-      <Name>DBDomain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ClassLibrary3\Util.csproj">
       <Project>{4ed5c9f9-5f76-4626-b421-265f430b0738}</Project>
       <Name>Util</Name>

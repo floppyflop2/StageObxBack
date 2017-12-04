@@ -1,5 +1,5 @@
-﻿using DBDomain;
-using Models;
+﻿using Models;
+using StageobxDB;
 using System.Collections.Generic;
 
 namespace DatabaseMapper
@@ -8,7 +8,7 @@ namespace DatabaseMapper
     {
 
 
-        public static StudentDTO MapToStudentDTO(Students student)
+        public static StudentDTO MapToStudentDTO(Student student)
         {
             return new StudentDTO()
             {
@@ -26,14 +26,14 @@ namespace DatabaseMapper
             };
         }
 
-        public static List<StudentDTO> MapToStudentDTO(List<Students> student)
+        public static List<StudentDTO> MapToStudentDTO(List<Student> student)
         {
-            List<StudentDTO> listOfStudents = new List<StudentDTO>();
-            student.ForEach(s => listOfStudents.Add(MapToStudentDTO(s)));
-            return listOfStudents;
+            List<StudentDTO> listOfStudent = new List<StudentDTO>();
+            student.ForEach(s => listOfStudent.Add(MapToStudentDTO(s)));
+            return listOfStudent;
         }
 
-        public static ContactDTO MapToContactDTO(Contacts contact)
+        public static ContactDTO MapToContactDTO(Contact contact)
         {
             return new ContactDTO()
             {
@@ -45,7 +45,7 @@ namespace DatabaseMapper
             };
         }
 
-        public static List<ContactDTO> MapToContactDTO(List<Contacts> contacts)
+        public static List<ContactDTO> MapToContactDTO(List<Contact> contacts)
         {
             List<ContactDTO> contactsList = new List<ContactDTO>();
             contacts.ForEach(c => contactsList.Add(MapToContactDTO(c)));
@@ -54,7 +54,7 @@ namespace DatabaseMapper
         }
 
 
-        public static CompanyDTO MapToCompanyDTO(Companies company)
+        public static CompanyDTO MapToCompanyDTO(Company company)
         {
             return new CompanyDTO()
             {
@@ -68,7 +68,7 @@ namespace DatabaseMapper
         }
 
 
-        public static List<CompanyDTO> MapToCompanyDTO(List<Companies> companies)
+        public static List<CompanyDTO> MapToCompanyDTO(List<Company> companies)
         {
             List<CompanyDTO> listOfCompanies = new List<CompanyDTO>();
             companies.ForEach(w => listOfCompanies.Add(MapToCompanyDTO(w)));

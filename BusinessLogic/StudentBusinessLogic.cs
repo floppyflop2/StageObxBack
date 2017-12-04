@@ -1,4 +1,4 @@
-﻿using DBDomain;
+﻿using StageobxDB;
 using Models;
 using System;
 using System.Collections.Generic;
@@ -16,9 +16,9 @@ namespace BusinessLogic
             object compList = new List<object>();
             try
             {
-                using (var db = new StageObxContext())
+                using (var db = new DBModel())
                 {
-                    compList = db.Students.ToList();
+                    compList = db.Student.ToList();
                 }
             }
             catch (Exception e)
@@ -26,18 +26,18 @@ namespace BusinessLogic
                 logger.Error(e.Message + "GetAllStudent impossible");
                 throw new Exception(e.Message);
             }
-            return MapToStudentDTO((List<Students>)compList);
+            return MapToStudentDTO((List<Student>)compList);
         }
 
         public override object Get(object obj)
         {
-            Students comp = new Students();
+            Student comp = new Student();
             int id = Check(obj);
             try
             {
-                using (var db = new StageObxContext())
+                using (var db = new DBModel())
                 {
-                    var result = db.Students.Where(c => c.StudentId == id).FirstOrDefault();
+                    var result = db.Student.Where(c => c.StudentId == id).FirstOrDefault();
                     comp = result;
                 }
             }
@@ -57,9 +57,9 @@ namespace BusinessLogic
             StudentDTO stud = (StudentDTO)obj;
             try
             {
-                using (var db = new StageObxContext())
+                using (var db = new DBModel())
                 {
-                    var result = db.Students.Where(s => s.StudentEmail == stud.Email);
+                    var result = db.Student.Where(s => s.StudentEmail == stud.Email);
                     if (result == null)
                     {
                         return -1;
@@ -82,11 +82,11 @@ namespace BusinessLogic
             StudentDTO std = (StudentDTO)obj;
             try
             {
-                using (var db = new StageObxContext())
+                using (var db = new DBModel())
                 {
-                    var result = db.Students.FirstOrDefault(c => c.StudentName == std.Name);
+                    var result = db.Student.FirstOrDefault(c => c.StudentName == std.Name);
                     if (!obj.Equals((Students)result))
-                        db.Students.Add(new Students()
+                        db.Students.Add(new Student()
                         {
                             StudentName = std.Name,
                             StudentFirstName = std.FirstName,
@@ -114,7 +114,7 @@ namespace BusinessLogic
                 return;
             try
             {
-                using (var db = new StageObxContext())
+                using (var db = new DBModel())
                 {
                     db.Students.Remove(db.Students.First(w => w.StudentId == id));
                     db.SaveChanges();
@@ -138,7 +138,7 @@ namespace BusinessLogic
             StudentDTO std = (StudentDTO)obj;
             try
             {
-                using (var db = new StageObxContext())
+                using (var db = new DBModel())
                 {
                     db.Students.Remove(db.Students.First(w => w.StudentId == id));
                     db.Students.Add(new Students()

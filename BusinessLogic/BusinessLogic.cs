@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Globalization;
-using DBDomain;
+using StageobxDB;
 
 namespace BusinessLogic
 {
@@ -79,7 +77,7 @@ namespace BusinessLogic
 
             try
             {
-                using (var db = new StageObxContext())
+                using (var db = new DBModel())
                 {
                     //Get the student with the same mail (code assumes the student exists already) 
                     var result = db.Students.Where(s => s.StudentEmail == mail);

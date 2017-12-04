@@ -1,5 +1,5 @@
-﻿using DBDomain;
-using Models;
+﻿using Models;
+using StageobxDB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +16,9 @@ namespace BusinessLogic
             object compList = new List<object>();
             try
             {
-                using (var db = new StageObxContext())
+                using (var db = new DBModel())
                 {
-                    compList = db.Internship.ToList();
+                    compList = db.Internships.ToList();
                 }
             }
             catch (Exception e)
@@ -36,9 +36,9 @@ namespace BusinessLogic
                 throw new Exception("No internship found");
             try
             {
-                using (var db = new StageObxContext())
+                using (var db = new DBModel())
                 {
-                    var result = db.Internship.Where(c => c.InternshipId == id).FirstOrDefault();
+                    var result = db.Internships.Where(c => c.InternshipId == id).FirstOrDefault();
                     comp = result;
                 }
             }
@@ -54,8 +54,8 @@ namespace BusinessLogic
         public override int Check(object obj)
         {
             InternshipDTO internship = (InternshipDTO)obj;
-            using (var db = new StageObxContext()){
-                var result = db.Internship.FirstOrDefault(i => i.CompanyId == internship.CompanyId && i.StudentId == internship.StudentId);
+            using (var db = new DBModel()){
+                var result = db.Internships.FirstOrDefault(i => i.CompanyId == internship.CompanyId && i.StudentId == internship.StudentId);
                 if (result == null)
                 {
                     return -1;
@@ -72,11 +72,11 @@ namespace BusinessLogic
             InternshipDTO internship = (InternshipDTO)obj;
             try
             {
-                using (var db = new StageObxContext())
+                using (var db = new DBModel())
                 {
-                    var result = db.Internship.FirstOrDefault(c => c.InternshipId == internship.Id);
+                    var result = db.Internships.FirstOrDefault(c => c.InternshipId == internship.Id);
                     if (!obj.Equals((Internship)result))
-                        db.Internship.Add(new Internship()
+                        db.Internships.Add(new Internship()
                         {
                             
                         });
@@ -98,9 +98,9 @@ namespace BusinessLogic
                 return;
             try
             {
-                using (var db = new StageObxContext())
+                using (var db = new DBModel())
                 {
-                    db.Internship.Remove(db.Internship.First(w => w.InternshipId == id));
+                    db.Internships.Remove(db.Internships.First(w => w.InternshipId == id));
                     db.SaveChanges();
                 }
             }
@@ -122,10 +122,10 @@ namespace BusinessLogic
             InternshipDTO std = (InternshipDTO)obj;
             try
             {
-                using (var db = new StageObxContext())
+                using (var db = new DBModel())
                 {
-                    db.Internship.Remove(db.Internship.First(w => w.InternshipId == id));
-                    db.Internship.Add(new Internship()
+                    db.Internships.Remove(db.Internships.First(w => w.InternshipId == id));
+                    db.Internships.Add(new Internship()
                     {
                       
                     });

@@ -1,10 +1,10 @@
-﻿using DBDomain;
-using Models;
+﻿using Models;
 using System.Collections.Generic;
 using System;
 using System.Linq;
 using static DatabaseMapper.DatabaseMapper;
 using Util;
+using StageobxDB;
 
 namespace BusinessLogic
 {
@@ -17,7 +17,7 @@ namespace BusinessLogic
             object compList = new List<object>();
             try
             {
-                using (var db = new StageObxContext())
+                using (var db = new DBModel())
                 {
                     compList = db.Companies.ToList();
                 }
@@ -27,16 +27,16 @@ namespace BusinessLogic
                 logger.Error(e.Message + "GetAllCompany impossible");
                 throw new Exception(e.Message);
             }
-            return MapToCompanyDTO((List<Companies>)compList);
+            return MapToCompanyDTO((List<Company>)compList);
         }
 
         public override object Get(object obj)
         {
-            Companies comp = new Companies();
+            Company comp = new Company();
             int id = Check(obj);
             try
             {
-                using (var db = new StageObxContext())
+                using (var db = new DBModel())
                 {
                     var result = db.Companies.Where(c => c.CompanyId == id).FirstOrDefault();
                     comp = result;
@@ -57,7 +57,7 @@ namespace BusinessLogic
             CompanyDTO comp = (CompanyDTO)obj;
             try
             {
-                using (var db = new StageObxContext())
+                using (var db = new DBModel())
                 {
                     var result = db.Companies.Where(c => c.CompanyName == comp.Name);
                     if (result == null)
@@ -82,11 +82,11 @@ namespace BusinessLogic
             CompanyDTO cpn = (CompanyDTO)obj;
             try
             {
-                using (var db = new StageObxContext())
+                using (var db = new DBModel())
                 {
                     var result = db.Companies.FirstOrDefault(c => c.CompanyName == cpn.Name);
-                    if (!obj.Equals((Companies)result))
-                        db.Companies.Add(new Companies()
+                    if (!obj.Equals((Company)result))
+                        db.Companies.Add(new Company()
                         {
                             CompanyName = cpn.Name,
                             CompanyCity = cpn.City,
@@ -112,7 +112,7 @@ namespace BusinessLogic
                 return;
             try
             {
-                using (var db = new StageObxContext())
+                using (var db = new DBModel())
                 {
                     db.Companies.Remove(db.Companies.First(w => w.CompanyId == id));
                     db.SaveChanges();
@@ -135,10 +135,10 @@ namespace BusinessLogic
             CompanyDTO cpn = (CompanyDTO)obj;
             try
             {
-                using (var db = new StageObxContext())
+                using (var db = new DBModel())
                 {
                     db.Companies.Remove(db.Companies.First(w => w.CompanyId == id));
-                    db.Companies.Add(new Companies()
+                    db.Companies.Add(new Company()
                     {
                         CompanyName = cpn.Name,
                         CompanyCity = cpn.City,
