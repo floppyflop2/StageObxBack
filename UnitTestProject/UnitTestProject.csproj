@@ -78,6 +78,10 @@
       <Project>{4ED5C9F9-5F76-4626-B421-265F430B0738}</Project>
       <Name>Util</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StageobxDB\StageobxDB.csproj">
+      <Project>{2CB68C98-C706-4DCA-A1BE-3F3A1FB5B98D}</Project>
+      <Name>StageobxDB</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

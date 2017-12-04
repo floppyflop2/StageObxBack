@@ -1,8 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using DBDomain;
 using System.Data.Entity;
-using Util;
+using StageobxDB;
 
 namespace UnitTestProject
 {
@@ -12,7 +11,7 @@ namespace UnitTestProject
         [TestMethod]
         public void TestMethod1()
         {
-            Students a = new Students()
+            Student a = new Student()
             {
                 StudentFirstName = "xxx",
                 StudentEmail = "xx",
@@ -30,10 +29,23 @@ namespace UnitTestProject
             {
                 Console.WriteLine(e.Message);
             }
+        }
 
-
-
-
+        [TestMethod]
+        public async void TestMethod2()
+        {
+            try
+            {
+                using (var db = new DBModel())
+                {
+                    await db.Students.FirstAsync();
+                    Console.WriteLine(db.Students.CountAsync());
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }

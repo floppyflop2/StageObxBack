@@ -73,6 +73,7 @@
     <Compile Include="InternshipBusinessLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StudentBusinessLogic.cs" />
+    <Compile Include="Students.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ClassLibrary3\Util.csproj">

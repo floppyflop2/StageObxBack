@@ -18,7 +18,7 @@ namespace BusinessLogic
             {
                 using (var db = new DBModel())
                 {
-                    compList = db.Student.ToList();
+                    compList = db.Students.ToList();
                 }
             }
             catch (Exception e)
@@ -37,7 +37,7 @@ namespace BusinessLogic
             {
                 using (var db = new DBModel())
                 {
-                    var result = db.Student.Where(c => c.StudentId == id).FirstOrDefault();
+                    var result = db.Students.Where(c => c.StudentId == id).FirstOrDefault();
                     comp = result;
                 }
             }
@@ -59,7 +59,7 @@ namespace BusinessLogic
             {
                 using (var db = new DBModel())
                 {
-                    var result = db.Student.Where(s => s.StudentEmail == stud.Email);
+                    var result = db.Students.Where(s => s.StudentEmail == stud.Email);
                     if (result == null)
                     {
                         return -1;
@@ -84,7 +84,7 @@ namespace BusinessLogic
             {
                 using (var db = new DBModel())
                 {
-                    var result = db.Student.FirstOrDefault(c => c.StudentName == std.Name);
+                    var result = db.Students.FirstOrDefault(c => c.StudentName == std.Name);
                     if (!obj.Equals((Students)result))
                         db.Students.Add(new Student()
                         {
