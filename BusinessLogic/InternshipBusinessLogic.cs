@@ -3,52 +3,56 @@ using StageobxDB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Util;
+using static DatabaseMapper.DatabaseMapper;
+
 
 namespace BusinessLogic
 {
     public class InternshipBusinessLogic : BusinessLogic
     {
-        Logger logger = new Logger();
 
         public override object GetAll()
         {
-            object compList = new List<object>();
+            List<Internship> internshipList = new List<Internship>();
             try
             {
                 using (var db = new DBModel())
                 {
-                    compList = db.Internships.ToList();
+                    internshipList = db.Internships.ToList();
                 }
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
-            return compList;
+            return MapToInternshipDTO(internshipList);
         }
 
         public override object Get(object obj)
         {
-            Internship comp = new Internship();
-            int id = Check(obj);
-            if (id == -1)
-                throw new Exception("No internship found");
+            Internship internship = new Internship();
+
+            int id = (int)obj;
+
+            if (id == 0)
+            {
+                return GetAll();
+            }
+
             try
             {
                 using (var db = new DBModel())
                 {
                     var result = db.Internships.Where(c => c.InternshipId == id).FirstOrDefault();
-                    comp = result;
+                    internship = result;
                 }
             }
             catch(Exception e)
             {
-                logger.Error(e.Message + "GetInternShip Error");
                 throw new Exception(e.Message);
             }
-            return comp;
 
+            return MapToInternshipDTO(internship); ;
         }
 
         public override int Check(object obj)
@@ -85,7 +89,6 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
-                logger.Error(e.Message + "AddInternship Error");
                 throw new Exception(e.Message);
             }
             return "";
@@ -106,7 +109,6 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
-                logger.Error(e.Message + "RemoveInternship Error");
                 throw new Exception(e.Message);
             }
 
@@ -134,7 +136,6 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
-                logger.Error(e.Message + "ModifyInternship Error");
                 throw new Exception(e.Message);
             }
         }

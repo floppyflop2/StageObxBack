@@ -44,6 +44,7 @@ namespace BusinessLogic
 
         }
 
+        /*
         public Boolean CheckToken(String encodedtoken)
         {
             //Code based on: https://github.com/jasonjoh/office365-azure-guides/blob/master/ValidatingYourToken.md
@@ -107,6 +108,7 @@ namespace BusinessLogic
 
         }
 
+    */
         public static string PrettyPrintJson(string jsonString)
         {
             try

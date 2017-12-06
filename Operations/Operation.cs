@@ -4,9 +4,9 @@ namespace Operations
     public static class Operation
     {
 
-        public static object Get(string caller, object obj)
+        public static object Get(string caller, int id)
         {
-            return GetBusinessLogic(caller).Get(obj);
+            return GetBusinessLogic(caller).Get(id);
         }
 
          public static int Check(string caller, object obj)
@@ -40,7 +40,7 @@ namespace Operations
                     return new StudentBusinessLogic();
                 case "Contact":
                     return new ContactBusinessLogic();
-                case "Documents":
+                case "Internship":
                     return new InternshipBusinessLogic();
                 case "Company":
                     return new CompanyBusinessLogic();

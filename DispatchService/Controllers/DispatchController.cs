@@ -12,17 +12,18 @@ namespace DispatchService.Controllers
 {
     public class DispatchController : ApiController
     {
-        [HttpPost]
-        [Route("{name}")]
-        public object DispatchPost(RequestModel obj, string name){
-            return name == null ? "Give a name" : Operation.Add(name, obj.FindCorrectDTO());
+        [HttpGet]
+        [Route("{name}/{id}")]
+        public object DispatchGet(string name, int id)
+        {
+            return name == null ? "Give a name" : Operation.Get(name, id);
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("{name}")]
-        public object DispatchGet(RequestModel obj, string name)
+        public object DispatchPost(RequestModel obj, string name)
         {
-            return name == null ? "Give a name" : Operation.Get(name, obj.FindCorrectDTO());
+            return name == null ? "Give a name" : Operation.Add(name, obj.FindCorrectDTO());
         }
 
         [HttpPut]

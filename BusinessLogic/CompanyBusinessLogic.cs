@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using static DatabaseMapper.DatabaseMapper;
-using Util;
 using StageobxDB;
 
 namespace BusinessLogic
 {
     public class CompanyBusinessLogic : BusinessLogic
     {
-        Logger logger = new Logger();
 
         public override object GetAll()
         {
@@ -24,7 +22,6 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
-                logger.Error(e.Message + "GetAllCompany impossible");
                 throw new Exception(e.Message);
             }
             return MapToCompanyDTO((List<Company>)compList);
@@ -33,7 +30,14 @@ namespace BusinessLogic
         public override object Get(object obj)
         {
             Company comp = new Company();
-            int id = Check(obj);
+
+            int id = (int)obj;
+            
+            if(id == 0)
+            {
+                return GetAll();
+            }
+
             try
             {
                 using (var db = new DBModel())
@@ -44,7 +48,6 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
-                logger.Error(e.Message + "GetCompany impossible");
                 throw new Exception(e.Message);
             }
             return MapToCompanyDTO(comp);
@@ -99,7 +102,6 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
-                logger.Error(e.Message + "unable to add company");
                 throw new Exception(e.Message);
             }
             return "";
@@ -120,7 +122,6 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
-                logger.Error(e.Message + "unable to remove a company");
                 throw new Exception(e.Message);
             }
 
@@ -153,7 +154,6 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
-                logger.Error(e.Message + "unable to modify company");
                 throw new Exception(e.Message);
             }
         }

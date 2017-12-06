@@ -3,14 +3,12 @@ using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Util;
 using static DatabaseMapper.DatabaseMapper;
 
 namespace BusinessLogic
 {
     public class StudentBusinessLogic : BusinessLogic
     {
-        Logger logger = new Logger();
         public override object GetAll()
         {
             object compList = new List<object>();
@@ -23,7 +21,6 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
-                logger.Error(e.Message + "GetAllStudent impossible");
                 throw new Exception(e.Message);
             }
             return MapToStudentDTO((List<Student>)compList);
@@ -32,7 +29,15 @@ namespace BusinessLogic
         public override object Get(object obj)
         {
             Student comp = new Student();
-            int id = Check(obj);
+            int id = (int)obj;
+
+            // GETS ALL THE STUDENTS IF ID == 0
+            if (id == 0)
+            {
+                return GetAll();
+            }
+
+            // GET THE STUDENT WITH THIS ID
             try
             {
                 using (var db = new DBModel())
@@ -43,12 +48,10 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
-                logger.Error(e.Message + "GetStudent impossible");
                 throw new Exception(e.Message);
             }
 
             return MapToStudentDTO(comp);
-
         }
 
         public override int Check(object obj)
@@ -72,7 +75,6 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
-                logger.Error(e.Message + "Check Error");
                 throw new Exception(e.Message);
             }
         }
@@ -84,8 +86,8 @@ namespace BusinessLogic
             {
                 using (var db = new DBModel())
                 {
-                    var result = db.Students.FirstOrDefault(c => c.StudentName == std.Name);
-                    if (!obj.Equals((Students)result))
+                    var result = db.Students.FirstOrDefault(c => c.StudentEmail == std.Email);
+                    if (!obj.Equals(result))
                         db.Students.Add(new Student()
                         {
                             StudentName = std.Name,
@@ -101,7 +103,6 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
-                logger.Error(e.Message + "AddStudent Error");
                 throw new Exception(e.Message);
             }
             return "";
@@ -122,11 +123,8 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
-                logger.Error(e.Message + "RemoveStudent Error");
                 throw new Exception(e.Message);
             }
-
-
         }
 
         public override void Modify(object obj)
@@ -140,23 +138,28 @@ namespace BusinessLogic
             {
                 using (var db = new DBModel())
                 {
-                    db.Students.Remove(db.Students.First(w => w.StudentId == id));
-                    db.Students.Add(new Students()
-                    {
-                        StudentName = std.Name,
-                        StudentFirstName = std.FirstName,
-                        StudentDepartement = std.Departement,
-                        StudentDocument = std.Document,
-                        StudentEmail = std.Email,
-                        StudentTelephone = std.Telephone,
-                        StudentToken = std.Token
-                    });
+                    Student student = db.Students.Remove(db.Students.First(w => w.StudentId == id));
+                    db.SaveChanges();
+
+                    if (std.FirstName != null)
+                        student.StudentFirstName = std.FirstName;
+                    if (std.Name != null)
+                        student.StudentName = std.Name;
+                    if (std.Telephone != null)
+                        student.StudentTelephone = std.Telephone;
+                    if (std.Token != null)
+                        student.StudentToken = std.Token;
+                    if (std.Departement != null)
+                        student.StudentDepartement = std.Departement;
+                    if (std.Document != null)
+                        student.StudentDocument = std.Document;
+
+                    db.Students.Add(student);
                     db.SaveChanges();
                 }
             }
             catch (Exception e)
             {
-                logger.Error(e.Message + "ModifyStudent Error");
                 throw new Exception(e.Message);
             }
         }

@@ -3,14 +3,13 @@ using StageobxDB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Util;
+using static DatabaseMapper.DatabaseMapper;
 
 namespace BusinessLogic
 {
     public class ContactBusinessLogic : BusinessLogic
     {
 
-        Logger logger = new Logger();
 
         public ContactBusinessLogic() { }
 
@@ -26,17 +25,22 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
-                logger.Error(e.Message + "GetAll impossible");
                 throw new Exception(e.Message);
             }
 
-            return DatabaseMapper.DatabaseMapper.MapToContactDTO((List<Contact>)compList);
+            return MapToContactDTO((List<Contact>)compList);
         }
 
         public override object Get(object obj)
         {
             Contact comp = new Contact();
-            int id = Check(obj);
+            int id = (int)obj;
+
+            if(id == 0)
+            {
+                return GetAll();
+            }
+
             try
             {
                 using (var db = new DBModel())
@@ -47,10 +51,9 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
-                logger.Error(e.Message + "GetContact impossible");
                 throw new Exception(e.Message);
             }
-            return DatabaseMapper.DatabaseMapper.MapToContactDTO(comp);
+            return MapToContactDTO(comp);
 
         }
 
@@ -75,7 +78,6 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
-                logger.Error(e.Message + "Check Error");
                 throw new Exception(e.Message);
             }
         }
@@ -104,7 +106,6 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
-                logger.Error(e.Message + "addContact impossible");
                 throw new Exception(e.Message);
             }
             return "";
@@ -115,7 +116,6 @@ namespace BusinessLogic
             int id = Check(obj);
             if (id == -1)
             {
-                logger.Error("contact not found !");
                 return;
             }
             try
@@ -131,7 +131,6 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
-                logger.Error(e.Message + "unable to remove contact");
                 throw new Exception(e.Message);
             }
         }
@@ -141,7 +140,6 @@ namespace BusinessLogic
             int id = Check(obj);
             if (id == -1)
             {
-                logger.Error("modify impossible contact not found");
                 return;
             }
             ContactDTO cont = (ContactDTO)obj;
@@ -161,7 +159,6 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
-                logger.Error(e.Message + "unable to modify contact");
                 throw new Exception(e.Message);
             }
         }
