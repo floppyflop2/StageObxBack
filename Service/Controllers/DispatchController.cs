@@ -19,7 +19,7 @@ namespace DispatchService.Controllers
         [HttpGet]
         [Authorize(Roles = "Admin")]
         [Route("{name}/{id}")]
-        public object DispatchGet(string name, int id)
+        public object DispatchGet(string name, string id)
         {
             return name == null ? "Give a name" : Operation.Get(name, id);
         }
@@ -28,7 +28,7 @@ namespace DispatchService.Controllers
         [Route("{name}")]
         public object DispatchGet(string name)
         {
-            return name == null ? "Give a name" : Operation.Get(name, 1);
+            return name == null ? "Give a name" : Operation.Get(name, User.Identity.GetUserId());
         }
 
         [HttpPost]

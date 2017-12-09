@@ -1,6 +1,6 @@
 ﻿using Models;
-using StageobxDB;
 using System.Collections.Generic;
+using ClassLibrary2;
 
 namespace DatabaseMapper
 {
@@ -13,16 +13,11 @@ namespace DatabaseMapper
             return new StudentDTO()
             {
                 Id = student.StudentId,
-                FirstName = student.StudentFirstName,
+                FirstName = student.StudentFirstname,
                 Name = student.StudentName,
                 Departement = student.StudentDepartement,
                 Document = student.StudentDocument,
-                Email = student.StudentEmail,
-                Telephone = student.StudentTelephone,
-              //  Token = student.Token,
-            //    StartTime = xxx,
-          //      ValidityPeriod = yyyy
-
+                Email = student.StudentEmail
             };
         }
 
@@ -33,32 +28,11 @@ namespace DatabaseMapper
             return listOfStudent;
         }
 
-        public static ContactDTO MapToContactDTO(Contact contact)
-        {
-            return new ContactDTO()
-            {
-                Id = contact.ContactId,
-                ContactName = contact.ContactName,
-                ContactFirstName = contact.ContactFirstName,
-                ContactTelephone = contact.ContactTelephone,
-                ContactEmail = contact.ContactEmail
-            };
-        }
-
-        public static List<ContactDTO> MapToContactDTO(List<Contact> contacts)
-        {
-            List<ContactDTO> contactsList = new List<ContactDTO>();
-            contacts.ForEach(c => contactsList.Add(MapToContactDTO(c)));
-
-            return contactsList;
-        }
-
-
         public static CompanyDTO MapToCompanyDTO(Company company)
         {
             return new CompanyDTO()
             {
-               // Id = company.CompanyId,
+                Id = company.CompanyId.ToString(),
                 Name = company.CompanyName,
                 City = company.CompanyCity,
                 StreetName = company.CompanyStreetName,
@@ -74,23 +48,6 @@ namespace DatabaseMapper
             companies.ForEach(w => listOfCompanies.Add(MapToCompanyDTO(w)));
             return listOfCompanies;
         }
-
-        public static InternshipDTO MapToInternshipDTO(Internship internship)
-        {
-            return new InternshipDTO()
-            {
-                //        Id = internship.InternshipId,
-                //      Year = internship.InternshipYear
-            };
-        }
-
-        public static List<InternshipDTO> MapToInternshipDTO(List<Internship> internships)
-        {
-            List<InternshipDTO> listOfInternships = new List<InternshipDTO>();
-            internships.ForEach(w => listOfInternships.Add(MapToInternshipDTO(w)));
-            return listOfInternships;
-        }
-
     }
 
 

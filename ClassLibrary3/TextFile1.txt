@@ -1,1 +1,0 @@
-﻿Install-Package MySql.Data -Version 6.10.4 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using static DatabaseMapper.DatabaseMapper;
-using StageobxDB;
+using ClassLibrary2;
 
 namespace BusinessLogic
 {
@@ -15,7 +15,7 @@ namespace BusinessLogic
             object compList = new List<object>();
             try
             {
-                using (var db = new DBModel())
+                using (var db = new stageobxdatabaseEntities())
                 {
                     compList = db.Companies.ToList();
                 }
@@ -40,7 +40,7 @@ namespace BusinessLogic
 
             try
             {
-                using (var db = new DBModel())
+                using (var db = new stageobxdatabaseEntities())
                 {
                     var result = db.Companies.Where(c => c.CompanyId == id).FirstOrDefault();
                     comp = result;
@@ -60,7 +60,7 @@ namespace BusinessLogic
             CompanyDTO comp = (CompanyDTO)obj;
             try
             {
-                using (var db = new DBModel())
+                using (var db = new stageobxdatabaseEntities())
                 {
                     var result = db.Companies.Where(c => c.CompanyName == comp.Name);
                     if (result == null)
@@ -85,7 +85,7 @@ namespace BusinessLogic
             CompanyDTO cpn = (CompanyDTO)obj;
             try
             {
-                using (var db = new DBModel())
+                using (var db = new stageobxdatabaseEntities())
                 {
                     var result = db.Companies.FirstOrDefault(c => c.CompanyName == cpn.Name);
                     if (!obj.Equals((Company)result))
@@ -114,7 +114,7 @@ namespace BusinessLogic
                 return;
             try
             {
-                using (var db = new DBModel())
+                using (var db = new stageobxdatabaseEntities())
                 {
                     db.Companies.Remove(db.Companies.First(w => w.CompanyId == id));
                     db.SaveChanges();
@@ -136,7 +136,7 @@ namespace BusinessLogic
             CompanyDTO cpn = (CompanyDTO)obj;
             try
             {
-                using (var db = new DBModel())
+                using (var db = new stageobxdatabaseEntities())
                 {
                     db.Companies.Remove(db.Companies.First(w => w.CompanyId == id));
                     db.Companies.Add(new Company()
