@@ -17,20 +17,18 @@ namespace DispatchService.Controllers
     {
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         [Route("{name}/{id}")]
         public object DispatchGet(string name, int id)
         {
-            if (name == "Create" && id == 0)
-            {
-                using (var context = new ApplicationDbContext())
-                {
-                    var roleStore = new RoleStore<IdentityRole>(context);
-                    var roleManager = new RoleManager<IdentityRole>(roleStore);
-                    roleManager.Create(new IdentityRole("Admin"));
-                }
-                return "";
-            }
             return name == null ? "Give a name" : Operation.Get(name, id);
+        }
+
+        [HttpGet]
+        [Route("{name}")]
+        public object DispatchGet(string name)
+        {
+            return name == null ? "Give a name" : Operation.Get(name, 1);
         }
 
         [HttpPost]
@@ -40,7 +38,6 @@ namespace DispatchService.Controllers
             return name == null ? "Give a name" : Operation.Add(name, obj.FindCorrectDTO());
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("{name}")]
         public object DispatchPut(RequestModel obj, string name)
@@ -60,6 +57,13 @@ namespace DispatchService.Controllers
                 return "Give a name";
             Operation.Remove(name, obj.FindCorrectDTO());
             return "Ok";
+        }
+
+        [HttpGet]
+        [Route("Admin")]
+        public bool DispatchRole()
+        {
+            return User.IsInRole("Admin");
         }
     }
 }

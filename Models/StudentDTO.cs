@@ -10,5 +10,6 @@
         public byte[] Document { get; set; }
         public string Telephone { get; set; }
         public string Token { get; set; }
+        public int UserID { get; set; }
     }
 }

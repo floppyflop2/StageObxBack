@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Web.Http.Cors;
 using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
@@ -19,6 +20,11 @@ namespace Service
 
             // Web API routes
             config.MapHttpAttributeRoutes();
+
+            var enableCorsAttribute = new EnableCorsAttribute("*",
+                                               "Origin, Content-Type, Accept, Authorization",
+                                               "GET, PUT, POST, DELETE, OPTIONS");
+            config.EnableCors();
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
