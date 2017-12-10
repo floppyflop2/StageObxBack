@@ -23,6 +23,21 @@ namespace BusinessLogic
             throw new Exception("Not implemented for this object");
         }
 
+        public virtual object Add(object obj, string id)
+        {
+            throw new Exception("Not implemented for this object");
+        }
+
+        public virtual void Remove(object obj, string id)
+        {
+            throw new Exception("Not implemented for this object");
+        }
+
+        public virtual void Modify(object obj)
+        {
+            throw new Exception("Not implemented for this object");
+        }
+
         public virtual object Add(object obj)
         {
             throw new Exception("Not implemented for this object");
@@ -33,7 +48,7 @@ namespace BusinessLogic
             throw new Exception("Not implemented for this object");
         }
 
-        public virtual void Modify(object obj)
+        public virtual void Modify(object obj, string id)
         {
             throw new Exception("Not implemented for this object");
         }

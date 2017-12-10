@@ -14,9 +14,9 @@ namespace Operations
             return GetBusinessLogic(caller).Check(obj);
         }
 
-        public static object Add(string caller, object obj)
+        public static object Add(string caller, object obj, string id)
         {
-            return GetBusinessLogic(caller).Add(obj);
+            return GetBusinessLogic(caller).Add(obj, id);
         }
 
 
@@ -26,9 +26,9 @@ namespace Operations
         }
 
 
-        public static void Modify(string caller, object obj)
+        public static void Modify(string caller, object obj, string id)
         {
-            GetBusinessLogic(caller).Modify(obj);
+            GetBusinessLogic(caller).Modify(obj, id);
         }
 
 

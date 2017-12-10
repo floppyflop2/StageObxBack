@@ -80,7 +80,7 @@ namespace BusinessLogic
 
         }
 
-        public override object Add(object obj)
+        public override object Add(object obj, string userId)
         {
             CompanyDTO cpn = (CompanyDTO)obj;
             try
@@ -107,7 +107,7 @@ namespace BusinessLogic
             return "";
         }
 
-        public override void Remove(object obj)
+        public override void Remove(object obj, string userId)
         {
             int id = Check(obj);
             if (id == -1)
@@ -128,7 +128,7 @@ namespace BusinessLogic
 
         }
 
-        public override void Modify(object obj)
+        public override void Modify(object obj, string userId)
         {
             int id = Check(obj);
             if (id == -1)

@@ -35,7 +35,7 @@ namespace DispatchService.Controllers
         [Route("{name}")]
         public object DispatchPost(RequestModel obj, string name)
         {
-            return name == null ? "Give a name" : Operation.Add(name, obj.FindCorrectDTO());
+            return name == null ? "Give a name" : Operation.Add(name, obj.FindCorrectDTO(), User.Identity.GetUserId());
         }
 
         [HttpPut]
@@ -44,7 +44,7 @@ namespace DispatchService.Controllers
         {
             if (name == null)
                 return "Give a name";
-            Operation.Modify(name, obj.FindCorrectDTO());
+            Operation.Modify(name, obj.FindCorrectDTO(), User.Identity.GetUserId());
             return "Ok";
         }
 
