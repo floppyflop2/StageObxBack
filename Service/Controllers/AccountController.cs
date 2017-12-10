@@ -19,7 +19,6 @@ using Service.Results;
 
 namespace Service.Controllers
 {
-    [Authorize]
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {

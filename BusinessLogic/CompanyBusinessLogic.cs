@@ -10,6 +10,7 @@ namespace BusinessLogic
     public class CompanyBusinessLogic : BusinessLogic
     {
 
+        // Gets all the companies
         public override object GetAll()
         {
             object compList = new List<object>();
@@ -26,77 +27,68 @@ namespace BusinessLogic
             }
             return MapToCompanyDTO((List<Company>)compList);
         }
-
-        public override object Get(object obj)
+        public override object Get(string userId)
         {
-            Company comp = new Company();
 
-            int id = (int)obj;
-            
-            if(id == 0)
+            int companyId = 0;
+            List<Company> result = null;
+
+            // GETS ALL THE COMPANIES IF ID == 0
+            if (userId == "0")
             {
                 return GetAll();
             }
 
-            try
+            if (!Int32.TryParse(userId, out companyId))
             {
-                using (var db = new stageobxdatabaseEntities())
+                try
                 {
-                    var result = db.Companies.Where(c => c.CompanyId == id).FirstOrDefault();
-                    comp = result;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-            return MapToCompanyDTO(comp);
-
-        }
-
-        public override int Check(object obj)
-        {
-
-            CompanyDTO comp = (CompanyDTO)obj;
-            try
-            {
-                using (var db = new stageobxdatabaseEntities())
-                {
-                    var result = db.Companies.Where(c => c.CompanyName == comp.Name);
-                    if (result == null)
+                    using (var db = new stageobxdatabaseEntities())
                     {
-                        return -1;
-                    }
-                    else
-                    {
-                        return result.SingleOrDefault().CompanyId;
+                        result = db.Companies.Where(c => c.Student.AspNetUserId == userId).ToList();
                     }
                 }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
             }
-            catch (Exception e)
+            else
             {
-                throw new Exception(e.Message);
+                try
+                {
+                    using (var db = new stageobxdatabaseEntities())
+                    {
+                        result = db.Companies.Where(c => c.CompanyId == companyId).ToList();
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
             }
-
+            return MapToCompanyDTO(result);
         }
 
         public override object Add(object obj, string userId)
         {
             CompanyDTO cpn = (CompanyDTO)obj;
+
             try
             {
                 using (var db = new stageobxdatabaseEntities())
                 {
-                    var result = db.Companies.FirstOrDefault(c => c.CompanyName == cpn.Name);
-                    if (!obj.Equals((Company)result))
-                        db.Companies.Add(new Company()
-                        {
-                            CompanyName = cpn.Name,
-                            CompanyCity = cpn.City,
-                            CompanyStreetName = cpn.StreetName,
-                            CompanyPostalCode = cpn.PostalCode,
-                            CompanyTelephone = cpn.Telephone
-                        });
+
+                    db.Companies.Add(new Company()
+                    {
+                        CompanyName = cpn.Name,
+                        CompanyCity = cpn.City,
+                        CompanyStreetName = cpn.StreetName,
+                        CompanyPostalCode = cpn.PostalCode,
+                        CompanyTelephone = cpn.Telephone,
+                        StudentId = db.Students.Where(w => w.AspNetUserId == userId).First().StudentId
+                    });
+
                     db.SaveChanges();
                 }
             }
@@ -105,57 +97,6 @@ namespace BusinessLogic
                 throw new Exception(e.Message);
             }
             return "";
-        }
-
-        public override void Remove(object obj, string userId)
-        {
-            int id = Check(obj);
-            if (id == -1)
-                return;
-            try
-            {
-                using (var db = new stageobxdatabaseEntities())
-                {
-                    db.Companies.Remove(db.Companies.First(w => w.CompanyId == id));
-                    db.SaveChanges();
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-
-
-        }
-
-        public override void Modify(object obj, string userId)
-        {
-            int id = Check(obj);
-            if (id == -1)
-                return;
-            CompanyDTO cpn = (CompanyDTO)obj;
-            try
-            {
-                using (var db = new stageobxdatabaseEntities())
-                {
-                    db.Companies.Remove(db.Companies.First(w => w.CompanyId == id));
-                    db.Companies.Add(new Company()
-                    {
-                        CompanyName = cpn.Name,
-                        CompanyCity = cpn.City,
-                        CompanyStreetName = cpn.StreetName,
-                        CompanyPostalCode = cpn.PostalCode,
-                        CompanyTelephone = cpn.Telephone
-
-                    });
-                    db.SaveChanges();
-
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
         }
     }
 }

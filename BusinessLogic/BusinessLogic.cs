@@ -13,37 +13,17 @@ namespace BusinessLogic
             throw new Exception("Not implemented for this object");
         }
 
-        public virtual object Get(object obj)
+        public virtual object Get(string id)
         {
             throw new Exception("Not implemented for this object");
         }
-
-        public virtual int Check(object obj)
-        {
-            throw new Exception("Not implemented for this object");
-        }
-
+        
         public virtual object Add(object obj, string id)
         {
             throw new Exception("Not implemented for this object");
         }
 
         public virtual void Remove(object obj, string id)
-        {
-            throw new Exception("Not implemented for this object");
-        }
-
-        public virtual void Modify(object obj)
-        {
-            throw new Exception("Not implemented for this object");
-        }
-
-        public virtual object Add(object obj)
-        {
-            throw new Exception("Not implemented for this object");
-        }
-
-        public virtual void Remove(object obj)
         {
             throw new Exception("Not implemented for this object");
         }
@@ -58,71 +38,6 @@ namespace BusinessLogic
 
         }
 
-        /*
-        public Boolean CheckToken(String encodedtoken)
-        {
-            //Code based on: https://github.com/jasonjoh/office365-azure-guides/blob/master/ValidatingYourToken.md
-
-            if (string.IsNullOrEmpty(encodedtoken))
-            {
-                Console.WriteLine("Token missing.");
-                return false;
-            }
-
-            string[] tokenParts = encodedtoken.Split('.');
-            if (tokenParts.Length < 3)
-            {
-                Console.WriteLine("JWT must have three parts.");
-                return false;
-            }
-
-            string header = PrettyPrintJson(Base64UrlEncoder.Decode(tokenParts[0]));
-
-            string payload = PrettyPrintJson(Base64UrlEncoder.Decode(tokenParts[1]));
-
-            JWT jwtpayload = JsonConvert.DeserializeObject<JWT>(payload);
-            string mail = jwtpayload.upn;
-            //TO DO: follow up with database crosscheck and issue date / validity duration check
-
-            //If validity is later than current date or if the token is already expired
-            if (jwtpayload.nbf > DateTime.Now.Ticks || jwtpayload.exp < DateTime.Now.Ticks)
-            {
-                return false;
-            }
-
-            try
-            {
-                using (var db = new DBModel())
-                {
-                    //Get the student with the same mail (code assumes the student exists already) 
-                    var result = db.Students.Where(s => s.StudentEmail == mail);
-
-                    JWT StudentToken = JsonConvert.DeserializeObject<JWT>(result.FirstOrDefault().StudentToken);
-
-                    //check if the unique ID is the same for both tokens
-                    if (jwtpayload.oid != StudentToken.oid)
-                    {
-                        return false;
-                    }
-
-                    //Overwrite the token in the db
-                    result.FirstOrDefault().StudentToken = payload;
-                    Modify(result);
-                    return true;
-
-                }
-            }
-            catch (Exception e)
-            {
-                //logger.Error(e.Message + "Check Error");
-                throw new Exception(e.Message);
-            }
-
-
-
-        }
-
-    */
         public static string PrettyPrintJson(string jsonString)
         {
             try

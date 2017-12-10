@@ -1,8 +1,9 @@
-﻿Drop table companies
+﻿Drop table contracts
+Drop table companies
 Drop table students
 
 CREATE TABLE Students
-(StudentId int NOT NULL,
+(StudentId int NOT NULL IDENTITY(1,1),
 StudentName varchar(255) NOT NULL,
 StudentFirstname varchar(255) NOT NULL,
 StudentDepartement varchar(255) NOT NULL,
@@ -15,7 +16,7 @@ CONSTRAINT FK_AspNetUsers FOREIGN KEY (AspNetUserId)
 UNIQUE (StudentEmail))
 
 CREATE TABLE Companies
-(CompanyId int NOT NULL,
+(CompanyId int NOT NULL IDENTITY(1,1),
 CompanyName varchar(255) NOT NULL,
 CompanyCity varchar(255) NOT NULL,
 CompanyStreetName varchar(255) NOT NULL,
@@ -27,7 +28,7 @@ CONSTRAINT FK_StudentId FOREIGN KEY (StudentId)
     REFERENCES Students (StudentId))
 
 CREATE TABLE Contracts
-(ContractId int NOT NULL,
+(ContractId int NOT NULL IDENTITY(1,1),
 ContractName varchar(255) NOT NULL,
 ContractSupervisorName varchar(255) NOT NULL,
 ContractSupervisorFirstName varchar(255) NOT NULL,
