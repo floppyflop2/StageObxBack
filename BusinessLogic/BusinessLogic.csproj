@@ -66,9 +66,9 @@
     <Compile Include="StudentBusinessLogic.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary2\ClassLibrary2.csproj">
+    <ProjectReference Include="..\ClassLibrary2\Database.csproj">
       <Project>{2f6400f4-516b-4792-a736-89cee48fe851}</Project>
-      <Name>ClassLibrary2</Name>
+      <Name>Database</Name>
     </ProjectReference>
     <ProjectReference Include="..\DatabaseMapper\DatabaseMapper.csproj">
       <Project>{aa307f8a-e63a-45a5-b132-77737be558e0}</Project>

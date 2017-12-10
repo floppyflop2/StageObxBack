@@ -54,9 +54,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary2\ClassLibrary2.csproj">
+    <ProjectReference Include="..\ClassLibrary2\Database.csproj">
       <Project>{2f6400f4-516b-4792-a736-89cee48fe851}</Project>
-      <Name>ClassLibrary2</Name>
+      <Name>Database</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{5ebc9942-b207-4a56-a618-12df8d9c98e3}</Project>

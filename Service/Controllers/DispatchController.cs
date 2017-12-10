@@ -46,7 +46,7 @@ namespace DispatchService.Controllers
             if (name == null)
                 return "Give a name";
             Operation.Modify(name, obj.FindCorrectDTO(), User.Identity.GetUserId());
-            return "Ok";
+            return "";
         }
 
         [Authorize(Roles = "Admin")]
@@ -57,7 +57,7 @@ namespace DispatchService.Controllers
             if  (name == null)
                 return "Give a name";
             Operation.Remove(name, obj.FindCorrectDTO());
-            return "Ok";
+            return "";
         }
         
 
