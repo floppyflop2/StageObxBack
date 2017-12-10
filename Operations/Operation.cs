@@ -35,6 +35,10 @@ namespace Operations
                     return new CompanyBusinessLogic();
                 case "Contract":
                     return new ContractBusinessLogic();
+                case "CompanyStudent":
+                    return new CompanyStudentBusinessLogic();
+                case "ContractStudent":
+                    return new ContractStudentBusinessLogic();
                 default:
                     return null;
             }
