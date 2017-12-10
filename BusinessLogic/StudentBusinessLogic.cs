@@ -12,19 +12,19 @@ namespace BusinessLogic
     {
         public override object GetAll()
         {
-            object compList = new List<object>();
+            List<Student> result = null;
             try
             {
                 using (var db = new stageobxdatabaseEntities())
                 {
-                    compList = db.Students.ToList();
+                    result = db.Students.ToList();
                 }
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
-            return MapToStudentDTO((List<Student>)compList);
+            return MapToStudentDTO(result);
         }
 
         public override object Get(string userId)
@@ -97,4 +97,5 @@ namespace BusinessLogic
             }
             return "";
         }
+    }
 }

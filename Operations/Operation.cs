@@ -9,10 +9,6 @@ namespace Operations
             return GetBusinessLogic(caller).Get(id);
         }
 
-         public static int Check(string caller, object obj)
-        {
-            return GetBusinessLogic(caller).Check(obj);
-        }
 
         public static object Add(string caller, object obj, string id)
         {
@@ -20,15 +16,14 @@ namespace Operations
         }
 
 
-        public static void Remove(string caller, object obj)
-        {
-            GetBusinessLogic(caller).Remove(obj);
-        }
-
-
         public static void Modify(string caller, object obj, string id)
         {
             GetBusinessLogic(caller).Modify(obj, id);
+        }
+
+        public static void Remove(string caller, object obj, string id)
+        {
+            GetBusinessLogic(caller).Remove(obj, id);
         }
 
 
