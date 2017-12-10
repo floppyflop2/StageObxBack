@@ -75,7 +75,8 @@ namespace DatabaseMapper
                 ContractSupervisorFirstName = contract.ContractSupervisorFirstName,
                 ContractSupervisorMail = contract.ContractSupervisorMail,
                 ContractSupervisorName = contract.ContractSupervisorName,
-                ContractSupervisorPhone = contract.ContractSupervisorPhone
+                ContractSupervisorPhone = contract.ContractSupervisorPhone,
+                StudentId = contract.StudentId
             };
         }
 

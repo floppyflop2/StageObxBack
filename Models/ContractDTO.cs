@@ -27,5 +27,6 @@ namespace Models
         public string ContractOptionnalInstruction { get; set; }
         public string ContractArrivalTime { get; set; }
         public string ContractNotes { get; set; }
+        public int StudentId { get; set; }
     }
 }
