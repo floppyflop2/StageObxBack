@@ -99,5 +99,57 @@ namespace BusinessLogic
             }
             return "";
         }
+
+        public override void Modify(object obj, string userId)
+        {
+            CompanyDTO cpn = (CompanyDTO)obj;
+
+            try
+            {
+                using (var db = new stageobxdatabaseEntities())
+                {
+                    if (db.Companies.First(comp => comp.CompanyId == cpn.Id) == null)
+                        return;
+
+                    db.Companies.Remove(db.Companies.First(comp => comp.CompanyId == cpn.Id));
+
+                    db.SaveChanges();
+
+                    db.Companies.Add(new Company()
+                    {
+                        CompanyName = cpn.Name,
+                        CompanyCity = cpn.City,
+                        CompanyStreetName = cpn.StreetName,
+                        CompanyPostalCode = cpn.PostalCode,
+                        CompanyTelephone = cpn.Telephone,
+                        StudentId = db.Students.Where(w => w.AspNetUserId == userId).First().StudentId
+                    });
+
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public override void Remove(object obj)
+        {
+            CompanyDTO company = (CompanyDTO)obj;
+            try
+            {
+                using (var db = new stageobxdatabaseEntities())
+                {
+                    db.Companies.Remove(db.Companies.First(comp => comp.CompanyId == company.Id));
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+        }
     }
 }

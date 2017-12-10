@@ -71,13 +71,16 @@ namespace BusinessLogic
             return MapToContractDTO(result);
         }
 
-        public override object Add(object obj, string id)
+        public override object Add(object obj, string userId)
         {
             ContractDTO contract = (ContractDTO)obj;
             try
             {
                 using (var db = new stageobxdatabaseEntities())
                 {
+                    if (db.Contracts.First(cont => cont.Student.AspNetUserId == userId) != null)
+                        return "Student already has a contract.";
+
                     db.Contracts.Add(
                         new Contract()
                         {
@@ -99,7 +102,7 @@ namespace BusinessLogic
                             ContractSupervisorMail = contract.ContractSupervisorMail,
                             ContractSupervisorName = contract.ContractSupervisorName,
                             ContractSupervisorPhone = contract.ContractSupervisorPhone,
-                            StudentId = db.Students.First(w => w.AspNetUserId == id).StudentId
+                            StudentId = db.Students.First(w => w.AspNetUserId == userId).StudentId
                         }    
                     );
                     db.SaveChanges();
@@ -111,5 +114,70 @@ namespace BusinessLogic
             }
             return "";
         }
+
+        public override void Modify(object obj, string userId)
+        {
+            ContractDTO contract = (ContractDTO)obj;
+            try
+            {
+                using (var db = new stageobxdatabaseEntities())
+                {
+                    if (db.Contracts.First(contr => contr.Student.AspNetUserId == userId) == null)
+                        return;
+
+                    db.Contracts.Remove(db.Contracts.First(contr => contr.Student.AspNetUserId == userId));
+
+                    db.SaveChanges();
+
+                    db.Contracts.Add(new Contract()
+                        {
+                            ContractAddressBox = contract.ContractAddressBox,
+                            ContractAddressCity = contract.ContractAddressCity,
+                            ContractAddressNumber = contract.ContractAddressNumber,
+                            ContractAddressPostalCode = contract.ContractAddressPostalCode,
+                            ContractAddressStreet = contract.ContractAddressStreet,
+                            ContractArrivalTime = contract.ContractArrivalTime,
+                            ContractContactName = contract.ContractContactName,
+                            ContractContactTitle = contract.ContractContactTitle,
+                            ContractModality = contract.ContractModality,
+                            ContractName = contract.ContractName,
+                            ContractNotes = contract.ContractNotes,
+                            ContractOptionnalInstruction = contract.ContractOptionnalInstruction,
+                            ContractPhone = contract.ContractPhone,
+                            ContractSubject = contract.ContractSubject,
+                            ContractSupervisorFirstName = contract.ContractSupervisorFirstName,
+                            ContractSupervisorMail = contract.ContractSupervisorMail,
+                            ContractSupervisorName = contract.ContractSupervisorName,
+                            ContractSupervisorPhone = contract.ContractSupervisorPhone,
+                            StudentId = db.Students.First(w => w.AspNetUserId == userId).StudentId
+                        });
+
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public override void Remove(object obj)
+        {
+            ContractDTO contract = (ContractDTO)obj;
+            try
+            {
+                using (var db = new stageobxdatabaseEntities())
+                {
+                    db.Contracts.Remove(db.Contracts.First(cont => cont.ContractId == contract.Id));
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+        }
+
     }
 }

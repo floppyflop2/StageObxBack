@@ -70,7 +70,7 @@ namespace BusinessLogic
             return MapToStudentDTO(result);
         }
 
-        public override object Add(object obj, string id)
+        public override object Add(object obj, string userId)
         {
             StudentDTO std = (StudentDTO)obj;
             try
@@ -86,7 +86,7 @@ namespace BusinessLogic
                             StudentDepartement = std.Departement,
                             StudentDocument = std.Document,
                             StudentEmail = std.Email,
-                            AspNetUserId = id
+                            AspNetUserId = userId
                         });
                     db.SaveChanges();
                 }
@@ -96,6 +96,23 @@ namespace BusinessLogic
                 throw new Exception(e.Message);
             }
             return "";
+        }
+
+        public override void Remove(object obj)
+        {
+            StudentDTO student = (StudentDTO)obj;
+            try
+            {
+                using (var db = new stageobxdatabaseEntities())
+                {
+                    db.Students.Remove(db.Students.First(stud => stud.StudentId == student.Id));
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }

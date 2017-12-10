@@ -8,7 +8,7 @@ namespace Models
 {
     public class ContractDTO
     {
-        public int ContractId { get; set; }
+        public int Id { get; set; }
         public string ContractName { get; set; }
         public string ContractSupervisorName { get; set; }
         public string ContractSupervisorFirstName { get; set; }

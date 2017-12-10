@@ -38,7 +38,7 @@ namespace DispatchService.Controllers
             return name == null ? "Give a name" : Operation.Add(name, obj.FindCorrectDTO(), User.Identity.GetUserId());
         }
 
-        /*
+        
         [HttpPut]
         [Route("{name}")]
         public object DispatchPut(RequestModel obj, string name)
@@ -59,7 +59,7 @@ namespace DispatchService.Controllers
             Operation.Remove(name, obj.FindCorrectDTO());
             return "Ok";
         }
-        */
+        
 
         [HttpGet]
         [Route("Admin")]

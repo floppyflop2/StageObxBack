@@ -19,9 +19,9 @@ namespace Operations
             GetBusinessLogic(caller).Modify(obj, id);
         }
 
-        public static void Remove(string caller, object obj, string id)
+        public static void Remove(string caller, object obj)
         {
-            GetBusinessLogic(caller).Remove(obj, id);
+            GetBusinessLogic(caller).Remove(obj);
         }
 
 

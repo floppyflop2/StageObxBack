@@ -28,11 +28,13 @@ namespace DatabaseMapper
             return listOfStudent;
         }
 
+
+
         public static CompanyDTO MapToCompanyDTO(Company company)
         {
             return new CompanyDTO()
             {
-                Id = company.CompanyId.ToString(),
+                Id = company.CompanyId,
                 Name = company.CompanyName,
                 City = company.CompanyCity,
                 StreetName = company.CompanyStreetName,
@@ -42,7 +44,6 @@ namespace DatabaseMapper
             };
         }
 
-
         public static List<CompanyDTO> MapToCompanyDTO(List<Company> companies)
         {
             List<CompanyDTO> listOfCompanies = new List<CompanyDTO>();
@@ -50,10 +51,13 @@ namespace DatabaseMapper
             return listOfCompanies;
         }
 
+
+
         public static ContractDTO MapToContractDTO(Contract contract)
         {
             return new ContractDTO()
             {
+                Id = contract.ContractId,
                 ContractAddressBox = contract.ContractAddressBox,
                 ContractAddressCity = contract.ContractAddressCity,
                 ContractAddressNumber = contract.ContractAddressNumber,
@@ -74,7 +78,6 @@ namespace DatabaseMapper
                 ContractSupervisorPhone = contract.ContractSupervisorPhone
             };
         }
-
 
         public static List<ContractDTO> MapToContractDTO(List<Contract> contracts)
         {
