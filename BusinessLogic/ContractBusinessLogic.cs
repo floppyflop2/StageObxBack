@@ -78,7 +78,7 @@ namespace BusinessLogic
             {
                 using (var db = new stageobxdatabaseEntities())
                 {
-                    if (db.Contracts.First(cont => cont.Student.AspNetUserId == userId) != null)
+                    if (db.Contracts.Where(cont => cont.Student.AspNetUserId == userId).Count() > 0)
                         return "Student already has a contract.";
 
                     db.Contracts.Add(
@@ -102,7 +102,7 @@ namespace BusinessLogic
                             ContractSupervisorMail = contract.ContractSupervisorMail,
                             ContractSupervisorName = contract.ContractSupervisorName,
                             ContractSupervisorPhone = contract.ContractSupervisorPhone,
-                            StudentId = db.Students.First(w => w.AspNetUserId == userId).StudentId
+                            StudentId = db.Students.Where(w => w.AspNetUserId == userId).First().StudentId
                         }    
                     );
                     db.SaveChanges();
@@ -110,7 +110,7 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                return e.Message;
             }
             return "";
         }
@@ -122,7 +122,7 @@ namespace BusinessLogic
             {
                 using (var db = new stageobxdatabaseEntities())
                 {
-                    if (db.Contracts.First(contr => contr.Student.AspNetUserId == userId) == null)
+                    if (db.Contracts.Where(w => w.Student.AspNetUserId == userId).Count() == 0)
                         return;
 
                     db.Contracts.Remove(db.Contracts.First(contr => contr.Student.AspNetUserId == userId));
