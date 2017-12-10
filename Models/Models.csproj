@@ -50,8 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompanyDTO.cs" />
-    <Compile Include="ContactDTO.cs" />
-    <Compile Include="InternshipDTO.cs" />
+    <Compile Include="ContractDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StudentDTO.cs" />
   </ItemGroup>

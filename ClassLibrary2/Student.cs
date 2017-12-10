@@ -26,7 +26,7 @@ namespace ClassLibrary2
         public string StudentFirstname { get; set; }
         public string StudentDepartement { get; set; }
         public string StudentEmail { get; set; }
-        public byte[] StudentDocument { get; set; }
+        public string StudentDocument { get; set; }
         public string AspNetUserId { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }

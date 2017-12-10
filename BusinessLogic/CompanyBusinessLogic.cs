@@ -94,7 +94,7 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                return e.Message;
             }
             return "";
         }

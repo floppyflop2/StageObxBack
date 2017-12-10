@@ -7,9 +7,7 @@
         public string FirstName { get; set; }
         public string Departement { get; set; }
         public string Email { get; set; }
-        public byte[] Document { get; set; }
+        public string Document { get; set; }
         public string Telephone { get; set; }
-        public string Token { get; set; }
-        public int UserID { get; set; }
     }
 }

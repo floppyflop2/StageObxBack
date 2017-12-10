@@ -8,7 +8,7 @@ StudentName varchar(255) NOT NULL,
 StudentFirstname varchar(255) NOT NULL,
 StudentDepartement varchar(255) NOT NULL,
 StudentEmail varchar(255) NOT NULL,
-StudentDocument VARBINARY,
+StudentDocument varchar(max),
 AspNetUserId nvarchar(128) NOT NULL,
 CONSTRAINT PK_StudentId PRIMARY KEY NONCLUSTERED (StudentId),     
 CONSTRAINT FK_AspNetUsers FOREIGN KEY (AspNetUserId)     

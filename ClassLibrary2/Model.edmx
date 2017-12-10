@@ -112,7 +112,7 @@
           <Property Name="StudentFirstname" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="StudentDepartement" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="StudentEmail" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="StudentDocument" Type="varbinary" MaxLength="1" />
+          <Property Name="StudentDocument" Type="varchar(max)" />
           <Property Name="AspNetUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -267,9 +267,6 @@
           <EntitySet Name="AspNetUserClaims" EntityType="stageobxdatabaseModel.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="stageobxdatabaseModel.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="stageobxdatabaseModel.AspNetUser" />
-          <EntitySet Name="Companies" EntityType="stageobxdatabaseModel.Company" />
-          <EntitySet Name="Contracts" EntityType="stageobxdatabaseModel.Contract" />
-          <EntitySet Name="Students" EntityType="stageobxdatabaseModel.Student" />
           <EntitySet Name="sysdiagrams" EntityType="stageobxdatabaseModel.sysdiagram" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="stageobxdatabaseModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
@@ -279,6 +276,13 @@
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
           </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="stageobxdatabaseModel.AspNetUserRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="Companies" EntityType="stageobxdatabaseModel.Company" />
+          <EntitySet Name="Contracts" EntityType="stageobxdatabaseModel.Contract" />
+          <EntitySet Name="Students" EntityType="stageobxdatabaseModel.Student" />
           <AssociationSet Name="FK_AspNetUsers" Association="stageobxdatabaseModel.FK_AspNetUsers">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="Student" EntitySet="Students" />
@@ -290,10 +294,6 @@
           <AssociationSet Name="FK_StudentIdContract" Association="stageobxdatabaseModel.FK_StudentIdContract">
             <End Role="Student" EntitySet="Students" />
             <End Role="Contract" EntitySet="Contracts" />
-          </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="stageobxdatabaseModel.AspNetUserRoles">
-            <End Role="AspNetRole" EntitySet="AspNetRoles" />
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
@@ -353,62 +353,8 @@
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="stageobxdatabaseModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="stageobxdatabaseModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
-          <NavigationProperty Name="Students" Relationship="stageobxdatabaseModel.FK_AspNetUsers" FromRole="AspNetUser" ToRole="Student" />
           <NavigationProperty Name="AspNetRoles" Relationship="stageobxdatabaseModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
-        </EntityType>
-        <EntityType Name="Company">
-          <Key>
-            <PropertyRef Name="CompanyId" />
-          </Key>
-          <Property Name="CompanyId" Type="Int32" Nullable="false" />
-          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="CompanyCity" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="CompanyStreetName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="CompanyPostalCode" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="CompanyTelephone" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="StudentId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Student" Relationship="stageobxdatabaseModel.FK_StudentId" FromRole="Company" ToRole="Student" />
-        </EntityType>
-        <EntityType Name="Contract">
-          <Key>
-            <PropertyRef Name="ContractId" />
-          </Key>
-          <Property Name="ContractId" Type="Int32" Nullable="false" />
-          <Property Name="ContractName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ContractSupervisorName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ContractSupervisorFirstName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ContractSupervisorMail" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ContractSupervisorPhone" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ContractAddressStreet" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ContractAddressNumber" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ContractAddressBox" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ContractAddressPostalCode" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ContractAddressCity" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ContractSubject" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ContractModality" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ContractContactTitle" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ContractContactName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ContractPhone" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ContractOptionnalInstruction" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ContractArrivalTime" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ContractNotes" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="StudentId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Student" Relationship="stageobxdatabaseModel.FK_StudentIdContract" FromRole="Contract" ToRole="Student" />
-        </EntityType>
-        <EntityType Name="Student">
-          <Key>
-            <PropertyRef Name="StudentId" />
-          </Key>
-          <Property Name="StudentId" Type="Int32" Nullable="false" />
-          <Property Name="StudentName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="StudentFirstname" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="StudentDepartement" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="StudentEmail" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="StudentDocument" Type="Binary" MaxLength="1" FixedLength="false" />
-          <Property Name="AspNetUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="stageobxdatabaseModel.FK_AspNetUsers" FromRole="Student" ToRole="AspNetUser" />
-          <NavigationProperty Name="Companies" Relationship="stageobxdatabaseModel.FK_StudentId" FromRole="Student" ToRole="Company" />
-          <NavigationProperty Name="Contracts" Relationship="stageobxdatabaseModel.FK_StudentIdContract" FromRole="Student" ToRole="Contract" />
+          <NavigationProperty Name="Students" Relationship="stageobxdatabaseModel.FK_AspNetUsers" FromRole="AspNetUser" ToRole="Student" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -448,6 +394,64 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="stageobxdatabaseModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="stageobxdatabaseModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+          </Key>
+          <Property Name="CompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyCity" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyStreetName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyPostalCode" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyTelephone" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="stageobxdatabaseModel.FK_StudentId" FromRole="Company" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="ContractId" />
+          </Key>
+          <Property Name="ContractId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContractName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ContractSupervisorName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ContractSupervisorFirstName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ContractSupervisorMail" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ContractSupervisorPhone" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ContractAddressStreet" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ContractAddressNumber" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ContractAddressBox" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ContractAddressPostalCode" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ContractAddressCity" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ContractSubject" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ContractModality" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ContractContactTitle" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ContractContactName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ContractPhone" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ContractOptionnalInstruction" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ContractArrivalTime" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ContractNotes" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="stageobxdatabaseModel.FK_StudentIdContract" FromRole="Contract" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="StudentFirstname" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="StudentDepartement" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="StudentEmail" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="StudentDocument" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AspNetUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="stageobxdatabaseModel.FK_AspNetUsers" FromRole="Student" ToRole="AspNetUser" />
+          <NavigationProperty Name="Companies" Relationship="stageobxdatabaseModel.FK_StudentId" FromRole="Student" ToRole="Company" />
+          <NavigationProperty Name="Contracts" Relationship="stageobxdatabaseModel.FK_StudentIdContract" FromRole="Student" ToRole="Contract" />
+        </EntityType>
         <Association Name="FK_AspNetUsers">
           <End Type="stageobxdatabaseModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
           <End Type="stageobxdatabaseModel.Student" Role="Student" Multiplicity="*" />
@@ -483,10 +487,6 @@
               <PropertyRef Name="StudentId" />
             </Dependent>
           </ReferentialConstraint>
-        </Association>
-        <Association Name="AspNetUserRoles">
-          <End Type="stageobxdatabaseModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
-          <End Type="stageobxdatabaseModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -549,6 +549,25 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="stageobxdatabaseModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="stageobxdatabaseModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUser">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="stageobxdatabaseModel.Company">
               <MappingFragment StoreEntitySet="Companies">
@@ -601,25 +620,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="stageobxdatabaseModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="stageobxdatabaseModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetUser">
-              <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-            <EndProperty Name="AspNetRole">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
