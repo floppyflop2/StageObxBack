@@ -8,5 +8,6 @@
         public string StreetName { get; set; }
         public string PostalCode { get; set; }
         public string Telephone { get; set; }
+        public int StudentId { get; set; }
     }
 }

@@ -37,7 +37,8 @@ namespace DatabaseMapper
                 City = company.CompanyCity,
                 StreetName = company.CompanyStreetName,
                 PostalCode = company.CompanyPostalCode,
-                Telephone = company.CompanyTelephone
+                Telephone = company.CompanyTelephone,
+                StudentId = company.StudentId
             };
         }
 
