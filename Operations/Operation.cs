@@ -9,12 +9,10 @@ namespace Operations
             return GetBusinessLogic(caller).Get(id);
         }
 
-
         public static object Add(string caller, object obj, string id)
         {
             return GetBusinessLogic(caller).Add(obj, id);
         }
-
 
         public static void Modify(string caller, object obj, string id)
         {
@@ -27,7 +25,7 @@ namespace Operations
         }
 
 
-        public static BusinessLogic.BusinessLogic GetBusinessLogic(string caller)
+        public static BaseBusinessLogic GetBusinessLogic(string caller)
         {
             switch (caller)
             {
@@ -35,6 +33,8 @@ namespace Operations
                     return new StudentBusinessLogic();
                 case "Company":
                     return new CompanyBusinessLogic();
+                case "Contract":
+                    return new ContractBusinessLogic();
                 default:
                     return null;
             }

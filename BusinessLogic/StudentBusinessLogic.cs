@@ -8,9 +8,9 @@ using static DatabaseMapper.DatabaseMapper;
 
 namespace BusinessLogic
 {
-    public class StudentBusinessLogic : BusinessLogic
+    public class StudentBusinessLogic : BaseBusinessLogic
     {
-        public override object GetAll()
+        private object GetAll()
         {
             List<Student> result = null;
             try

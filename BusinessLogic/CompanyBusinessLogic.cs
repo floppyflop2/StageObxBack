@@ -7,11 +7,11 @@ using ClassLibrary2;
 
 namespace BusinessLogic
 {
-    public class CompanyBusinessLogic : BusinessLogic
+    public class CompanyBusinessLogic : BaseBusinessLogic
     {
 
         // Gets all the companies
-        public override object GetAll()
+        private object GetAll()
         {
             object compList = new List<object>();
             try
@@ -27,6 +27,7 @@ namespace BusinessLogic
             }
             return MapToCompanyDTO((List<Company>)compList);
         }
+
         public override object Get(string userId)
         {
 

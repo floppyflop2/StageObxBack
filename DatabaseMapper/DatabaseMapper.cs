@@ -48,6 +48,39 @@ namespace DatabaseMapper
             companies.ForEach(w => listOfCompanies.Add(MapToCompanyDTO(w)));
             return listOfCompanies;
         }
+
+        public static ContractDTO MapToContractDTO(Contract contract)
+        {
+            return new ContractDTO()
+            {
+                ContractAddressBox = contract.ContractAddressBox,
+                ContractAddressCity = contract.ContractAddressCity,
+                ContractAddressNumber = contract.ContractAddressNumber,
+                ContractAddressPostalCode = contract.ContractAddressPostalCode,
+                ContractAddressStreet = contract.ContractAddressStreet,
+                ContractArrivalTime = contract.ContractArrivalTime,
+                ContractContactName = contract.ContractContactName,
+                ContractContactTitle = contract.ContractContactTitle,
+                ContractModality = contract.ContractModality,
+                ContractName = contract.ContractName,
+                ContractNotes = contract.ContractNotes,
+                ContractOptionnalInstruction = contract.ContractOptionnalInstruction,
+                ContractPhone = contract.ContractPhone,
+                ContractSubject = contract.ContractSubject,
+                ContractSupervisorFirstName = contract.ContractSupervisorFirstName,
+                ContractSupervisorMail = contract.ContractSupervisorMail,
+                ContractSupervisorName = contract.ContractSupervisorName,
+                ContractSupervisorPhone = contract.ContractSupervisorPhone
+            };
+        }
+
+
+        public static List<ContractDTO> MapToContractDTO(List<Contract> contracts)
+        {
+            List<ContractDTO> listOfContracts = new List<ContractDTO>();
+            contracts.ForEach(w => listOfContracts.Add(MapToContractDTO(w)));
+            return listOfContracts;
+        }
     }
 
 

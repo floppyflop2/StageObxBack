@@ -7,10 +7,11 @@ namespace Service.Models
     {
         public StudentDTO StudentDTO { get; set; }
         public CompanyDTO CompanyDTO { get; set; }
+        public ContractDTO ContractDTO { get; set; }
 
         public object FindCorrectDTO()
         {
-            return new object[] { StudentDTO, CompanyDTO }.FirstOrDefault(w => w != null);
+            return new object[] { StudentDTO, CompanyDTO, ContractDTO }.FirstOrDefault(w => w != null);
         }
     }
 }
