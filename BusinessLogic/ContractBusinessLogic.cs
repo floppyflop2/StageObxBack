@@ -46,7 +46,7 @@ namespace BusinessLogic
                 {
                     using (var db = new stageobxdatabaseEntities())
                     {
-                        result = db.Contracts.Where(c => c.ContractId == contractId).ToList();
+                        result = db.Contracts.Where(c => c.Student.AspNetUserId == userId).ToList();
                     }
                 }
                 catch (Exception e)
@@ -60,7 +60,7 @@ namespace BusinessLogic
                 {
                     using (var db = new stageobxdatabaseEntities())
                     {
-                        result = db.Contracts.Where(c => c.Student.AspNetUserId == userId).ToList();
+                        result = db.Contracts.Where(c => c.ContractId == contractId).ToList();
                     }
                 }
                 catch (Exception e)
