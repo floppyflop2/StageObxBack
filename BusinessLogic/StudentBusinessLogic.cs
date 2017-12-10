@@ -98,6 +98,25 @@ namespace BusinessLogic
             return "";
         }
 
+        public override void Modify(object obj, string userId)
+        {
+            StudentDTO student = (StudentDTO)obj;
+
+            try
+            {
+                using (var db = new stageobxdatabaseEntities())
+                {
+                    Student stud = db.Students.First(w => w.AspNetUserId == userId);
+                    stud.StudentDocument = student.Document;
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         public override void Remove(object obj)
         {
             StudentDTO student = (StudentDTO)obj;
