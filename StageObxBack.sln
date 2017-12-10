@@ -29,7 +29,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseMapper", "DatabaseM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{A8F8BCCB-D1A0-4230-B3AC-27ADD551952B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "ClassLibrary2\Database.csproj", "{2F6400F4-516B-4792-A736-89CEE48FE851}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{2F6400F4-516B-4792-A736-89CEE48FE851}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
